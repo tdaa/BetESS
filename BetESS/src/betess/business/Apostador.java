@@ -5,47 +5,36 @@
  */
 package betess.business;
 
+import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  *
  * @author tiagoalves
  */
-public class Apostador {
+public class Apostador extends Utilizador{
     
-    private String email;
     private String nome;
-    private String password;
     private double essCoins;
     private Map<Integer,Aposta> apostas;
 
-    public Apostador(String email, String nome, String password, double essCoins, Map<Integer, Aposta> aps) {
-        this.email = email;
+    public Apostador(String email, String nome, String password, double essCoins) {
+        super(email,password);
         this.nome = nome;
-        this.password = password;
         this.essCoins = essCoins;
-        this.setApostas(aps);
+        this.apostas = new HashMap<>();
     }
     
     public Apostador(Apostador a){
-        this.email = a.email;
+        super(a.getEmail(), a.getPassword());
         this.nome = a.nome;
-        this.password = a.password;
         this.essCoins = a.essCoins;
         this.apostas = a.getApostas();
     }
 
     public Apostador() {
-        this.apostas = new TreeMap<>();
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
+        super();
+        this.apostas = new HashMap<>();
     }
 
     public String getNome() {
@@ -54,14 +43,6 @@ public class Apostador {
 
     public void setNome(String nome) {
         this.nome = nome;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public double getEssCoins() {
@@ -73,7 +54,7 @@ public class Apostador {
     }
 
     public Map<Integer, Aposta> getApostas() {
-        Map<Integer,Aposta> aps = new TreeMap<>();
+        Map<Integer,Aposta> aps = new HashMap<>();
         this.apostas.entrySet().forEach((m) -> {
             aps.put(m.getKey(), m.getValue());
         });
@@ -88,8 +69,34 @@ public class Apostador {
 
     @Override
     public String toString() {
-        return "Apostador{" + "email=" + email + ", nome=" + nome + ", password=" + password + ", essCoins=" + essCoins + ", apostas=" + apostas + '}';
+        return "Apostador{" + "nome=" + nome + ", essCoins=" + essCoins + ", apostas=" + apostas + '}';
     }
+    
+    //quando o apostador clica em "submeter aposta" é fechada uma aposta, e quando
+    //quiser adicionar um outro evento a uma aposta, esta aposta terá que ser nova.
+    //Para verificar se é aposta nova ou não, terá que ser guardado um boolean na frame a dizer
+    // que é suposto ser criada uma aposta nova, e que é colocado a true quando clica em
+    // "submeter aposta". 
+    
+    //adicionar evento a aposta
+    public void addEventoToAposta(Evento e, boolean novaAposta, int idAposta){
+        if(novaAposta){
+            Aposta a = new Aposta(idAposta);
+            a.addEventoToAposta(e);
+        }
+        else{
+            this.apostas.get(idAposta).addEventoToAposta(e);
+        }
+    }
+    
+    //para saber qual o novo id de aposta
+    public int getIdNovaAposta(){
+        return this.apostas.size() + 1;
+    }
+    
+     
+    
+    
     
     
     

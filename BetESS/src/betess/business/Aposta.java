@@ -5,6 +5,7 @@
  */
 package betess.business;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -24,8 +25,9 @@ public class Aposta {
         this.valor = valor;
     }
 
-    public Aposta() {
-        this.eventos = new TreeMap<>();
+    public Aposta(int id) {
+        this.idAposta = id;
+        this.eventos = new HashMap<>();
     }
     
     public Aposta(Aposta a){
@@ -43,7 +45,7 @@ public class Aposta {
     }
 
     public Map<Integer, Evento> getEventos() {
-        Map<Integer,Evento> evs = new TreeMap<>();
+        Map<Integer,Evento> evs = new HashMap<>();
         for(Map.Entry<Integer,Evento> m: this.eventos.entrySet())
             eventos.put(m.getKey(), m.getValue());
         return evs;
@@ -67,6 +69,11 @@ public class Aposta {
         return "Aposta{" + "idAposta=" + idAposta + ", eventos=" + eventos + ", valor=" + valor + '}';
     }
     
+    //adicionar evento a aposta
+    public void addEventoToAposta(Evento e){
+        if(!this.eventos.containsKey(e.getIdEvento()))
+            this.eventos.put(e.getIdEvento(), e);
+    }
     
     
     

@@ -5,9 +5,9 @@
  */
 package betess.business;
 
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  *
@@ -18,17 +18,16 @@ public class BetESS {
     private Map<String,Apostador> apostadores;
     private Map<Integer,Evento> eventos;
     private Map<String,LinkedList<Aposta>> apostas;
-    private int user;
+    private String user;
 
-    public BetESS(Map<String, Apostador> apostadores, Map<Integer, Evento> eventos, Map<String, LinkedList<Aposta>> apostas, int user) {
-        this.apostadores = apostadores;
-        this.eventos = eventos;
-        this.apostas = apostas;
-        this.user = user;
+    public BetESS() {
+        this.apostadores = new HashMap<>();
+        this.eventos = new HashMap<>();
+        this.apostas = new HashMap<>();
     }
 
     public Map<String, Apostador> getApostadores() {
-        Map<String,Apostador> aps = new TreeMap<>();
+        Map<String,Apostador> aps = new HashMap<>();
         this.apostadores.entrySet().forEach((m) -> {
             aps.put(m.getKey(), m.getValue());
         });
@@ -42,7 +41,7 @@ public class BetESS {
     }
 
     public Map<Integer, Evento> getEventos() {
-        Map<Integer,Evento> evs = new TreeMap<>();
+        Map<Integer,Evento> evs = new HashMap<>();
         this.eventos.entrySet().forEach((m) -> {
             evs.put(m.getKey(), m.getValue());
         });
@@ -55,7 +54,7 @@ public class BetESS {
 
     public Map<String, LinkedList<Aposta>> getApostas() {
         LinkedList<Aposta> lista = new LinkedList<>();
-        Map<String,LinkedList<Aposta>> aps = new TreeMap<>();
+        Map<String,LinkedList<Aposta>> aps = new HashMap<>();
         for(Map.Entry<String,LinkedList<Aposta>> m: this.apostas.entrySet()){
             for(Aposta a: m.getValue())
                 lista.add(a);
@@ -75,21 +74,53 @@ public class BetESS {
         }
     }
 
-    public int getUser() {
+    public String getUser() {
         return user;
     }
 
-    public void setUser(int user) {
+    public void setUser(String user) {
         this.user = user;
     }
     
-    
-    
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        // TODO code application logic here
+    //registo
+    public boolean registo(String email, String nome, String pass, double coins){
+        if(!this.apostadores.containsKey(email)){
+            Apostador a = new Apostador(email, nome, pass, coins);
+            this.apostadores.put(email, a);
+            return true;
+        }
+        return false;
+        //retorno boolean para saberes se inseriu com sucesso ou não.
     }
+    
+    //login
+    public void login(String email, String pass) throws EmailErradoException, PassErradaException{
+         if(email.equals("betAdmin@di.pt") && pass.equals("betAdmin")){
+            Admin a = new Admin();
+            this.setUser(email);
+        }
+        else{
+            if(this.apostadores.containsKey(email)){
+                Apostador a = this.apostadores.get(email);
+                if(pass.equals(a.getPassword())){
+                    this.setUser(email);
+                }
+                else throw new PassErradaException("Password incorreta!");
+            }
+            else throw new EmailErradoException("Email errado!");
+        }   
+    }
+    
+    //consultar evento por id
+    public Evento getEvento(int id){
+        if(this.eventos.containsKey(id)) return this.eventos.get(id);
+        return null;
+    }
+   
+    
+    
+    
+    
+    
     
 }
