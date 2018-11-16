@@ -7,7 +7,6 @@ package betess.business;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.TreeMap;
 
 /**
  *
@@ -16,7 +15,7 @@ import java.util.TreeMap;
 public class Aposta {
     
     private int idAposta;
-    private Map<Integer,Evento> eventos;
+    private Map<Integer, Evento> eventos;
     private double valor;
 
     public Aposta(int idAposta, Map<Integer, Evento> eventos, double valor) {
@@ -30,14 +29,19 @@ public class Aposta {
         this.eventos = new HashMap<>();
     }
     
-    public Aposta(Aposta a){
-        this.idAposta = a.idAposta;
-        this.valor = a.valor;
+    public Aposta(Aposta a) {
+        this.idAposta = a.getIdAposta();
+        this.valor = a.getValor();
         this.eventos = a.getEventos();
     }
 
+    /**
+     * Getters e Setters
+     * @return 
+     */
+    
     public int getIdAposta() {
-        return idAposta;
+        return this.idAposta;
     }
 
     public void setIdAposta(int idAposta) {
@@ -45,15 +49,19 @@ public class Aposta {
     }
 
     public Map<Integer, Evento> getEventos() {
-        Map<Integer,Evento> evs = new HashMap<>();
-        for(Map.Entry<Integer,Evento> m: this.eventos.entrySet())
+        Map<Integer, Evento> evs = new HashMap<>();
+        
+        this.eventos.entrySet().forEach(m -> {
             eventos.put(m.getKey(), m.getValue());
+        });
+        
         return evs;
     }
 
     public void setEventos(Map<Integer, Evento> evs) {
-        for(Map.Entry<Integer,Evento> m: eventos.entrySet())
+        this.eventos.entrySet().forEach(m -> {
             this.eventos.put(m.getKey(), m.getValue());
+        });
     }
 
     public double getValor() {
@@ -64,18 +72,20 @@ public class Aposta {
         this.valor = valor;
     }
 
+    /**
+     * Método toString().
+     * Retorna uma representação textual do objeto.
+     * @return 
+     */
     @Override
     public String toString() {
-        return "Aposta{" + "idAposta=" + idAposta + ", eventos=" + eventos + ", valor=" + valor + '}';
+        return "Aposta{" + "idAposta=" + this.idAposta + 
+               ", eventos=" + this.eventos + ", valor=" + this.valor + '}';
     }
     
-    //adicionar evento a aposta
-    public void addEventoToAposta(Evento e){
-        if(!this.eventos.containsKey(e.getIdEvento()))
+    // Adicionar evento a aposta
+    public void addEventoToAposta(Evento e) {
+        if (!this.eventos.containsKey(e.getIdEvento()))
             this.eventos.put(e.getIdEvento(), e);
     }
-    
-    
-    
-    
 }

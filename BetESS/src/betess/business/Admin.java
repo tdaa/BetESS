@@ -9,11 +9,9 @@ package betess.business;
  *
  * @author tiagoalves
  */
-public class Admin extends Utilizador{
-
+public class Admin extends Utilizador {
+    
     public Admin() {
         super("betAdmin@di.pt", "betAdmin");
     }
-    
-    
 }

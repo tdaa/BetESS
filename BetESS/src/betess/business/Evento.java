@@ -20,7 +20,10 @@ public class Evento {
     private String estado;
     private String resultado;
 
-    public Evento(int idEvento, String equipaUm, String equipaDois, double oddUm, double oddDois, double oddX, String estado, String resultado) {
+    
+    public Evento(int idEvento, String equipaUm, String equipaDois, double oddUm, 
+                  double oddDois, double oddX, String estado, String resultado) 
+    {
         this.idEvento = idEvento;
         this.equipaUm = equipaUm;
         this.equipaDois = equipaDois;
@@ -31,17 +34,22 @@ public class Evento {
         this.resultado = resultado;
     }
     
-    public Evento(Evento e){
-        this.idEvento = e.idEvento;
-        this.equipaUm = e.equipaUm;
-        this.equipaDois = e.equipaDois;
-        this.oddUm = e.oddUm;
-        this.oddDois = e.oddDois;
-        this.oddX = e.oddX;
-        this.estado = e.estado;
-        this.resultado = e.resultado;
+    public Evento(Evento e) {
+        this.idEvento = e.getIdEvento();
+        this.equipaUm = e.getEquipaUm();
+        this.equipaDois = e.getEquipaDois();
+        this.oddUm = e.getOddUm();
+        this.oddDois = e.getOddDois();
+        this.oddX = e.getOddX();
+        this.estado = e.getEstado();
+        this.resultado = e.getResultado();
     }
 
+    /**
+     * Getters e Setters.
+     * @return 
+     */
+    
     public int getIdEvento() {
         return idEvento;
     }
@@ -105,8 +113,4 @@ public class Evento {
     public void setResultado(String resultado) {
         this.resultado = resultado;
     }
-
-    
-   
-    
 }
