@@ -34,6 +34,10 @@ public class Aposta {
         this.valor = a.getValor();
         this.eventos = a.getEventos();
     }
+    
+    public Aposta(){
+        this.eventos = new HashMap<>();
+    }
 
     /**
      * Getters e Setters
