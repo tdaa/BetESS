@@ -15,36 +15,54 @@ import java.util.Map;
  */
 public class BetESS {
 
-    private Map<String,Apostador> apostadores;
-    private Map<Integer,Evento> eventos;
-    private Map<String,LinkedList<Aposta>> apostas;
     private String user;
+    private Map<String, Apostador> apostadores;
+    private Map<Integer, Evento> eventos;
+    private Map<String, LinkedList<Aposta>> apostas;
 
     public BetESS() {
+        this.user = "";
         this.apostadores = new HashMap<>();
         this.eventos = new HashMap<>();
         this.apostas = new HashMap<>();
     }
 
+    /**
+     * Getters e Setters.
+     * @return 
+     */
+    
+    public String getUser() {
+        return this.user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+    
     public Map<String, Apostador> getApostadores() {
-        Map<String,Apostador> aps = new HashMap<>();
-        this.apostadores.entrySet().forEach((m) -> {
+        Map<String, Apostador> aps = new HashMap<>();
+        
+        this.apostadores.entrySet().forEach(m -> {
             aps.put(m.getKey(), m.getValue());
         });
+        
         return aps;
     }
 
     public void setApostadores(Map<String, Apostador> aps) {
-        aps.entrySet().forEach((m) -> {
+        aps.entrySet().forEach(m -> {
             this.apostadores.put(m.getKey(), m.getValue());
         });
     }
 
     public Map<Integer, Evento> getEventos() {
-        Map<Integer,Evento> evs = new HashMap<>();
-        this.eventos.entrySet().forEach((m) -> {
+        Map<Integer, Evento> evs = new HashMap<>();
+        
+        this.eventos.entrySet().forEach(m -> {
             evs.put(m.getKey(), m.getValue());
         });
+        
         return evs;
     }
 
@@ -53,74 +71,75 @@ public class BetESS {
     }
 
     public Map<String, LinkedList<Aposta>> getApostas() {
-        LinkedList<Aposta> lista = new LinkedList<>();
-        Map<String,LinkedList<Aposta>> aps = new HashMap<>();
-        for(Map.Entry<String,LinkedList<Aposta>> m: this.apostas.entrySet()){
-            for(Aposta a: m.getValue())
-                lista.add(a);
-            aps.put(m.getKey(), lista);
-            lista.clear();
-        }
+        Map<String, LinkedList<Aposta>> aps = new HashMap<>();
+          
+        this.apostas.keySet().forEach(id -> {
+            LinkedList<Aposta> lista = new LinkedList<>();
+            
+            this.apostas.get(id).forEach(a -> {
+                lista.addFirst(a);
+            });
+            
+            aps.put(id, lista);
+        });
+        
         return aps;
     }
 
-    public void setApostas(Map<String, LinkedList<Aposta>> apostas) {
-        LinkedList<Aposta> lista = new LinkedList<>();
-        for(Map.Entry<String,LinkedList<Aposta>> m: apostas.entrySet()){
-            for(Aposta a: m.getValue())
-                lista.add(a);
-            this.apostas.put(m.getKey(), lista);
-            lista.clear();
-        }
-    }
-
-    public String getUser() {
-        return user;
-    }
-
-    public void setUser(String user) {
-        this.user = user;
+    public void setApostas(Map<String, LinkedList<Aposta>> apostas) {      
+        apostas.keySet().forEach(id -> {
+            LinkedList<Aposta> lista = new LinkedList<>();
+            
+            apostas.get(id).forEach(a -> {
+                lista.addFirst(a);
+            });
+            
+            this.apostas.put(id, lista);
+        });
     }
     
-    //registo
-    public boolean registo(String email, String nome, String pass, double coins){
-        if(!this.apostadores.containsKey(email)){
+    /* Consultar evento por id */
+    public Evento getEvento(int id) {
+        Evento e = null;
+        
+        if (this.eventos.containsKey(id))
+            e = this.eventos.get(id);
+        
+        return e;
+    }
+    
+    /* Registo */
+    public boolean registo(String email, String nome, String pass, double coins) {
+        boolean auth = false;
+        
+        if (!this.apostadores.containsKey(email)) {
             Apostador a = new Apostador(email, nome, pass, coins);
             this.apostadores.put(email, a);
-            return true;
+            
+            auth = true;
         }
-        return false;
-        //retorno boolean para saberes se inseriu com sucesso ou não.
+        
+        // retorno boolean para saberes se inseriu com sucesso ou não.
+        return auth;
     }
     
-    //login
-    public void login(String email, String pass) throws EmailErradoException, PassErradaException{
-         if(email.equals("betAdmin@di.pt") && pass.equals("betAdmin")){
+    /* Login */
+    public void login(String email, String pass) 
+           throws EmailErradoException, PassErradaException 
+    {
+        if (email.equals("betAdmin@di.pt") && pass.equals("betAdmin")) {
             Admin a = new Admin();
             this.setUser(email);
-        }
-        else{
-            if(this.apostadores.containsKey(email)){
+        } else {
+            if (this.apostadores.containsKey(email)) {
                 Apostador a = this.apostadores.get(email);
-                if(pass.equals(a.getPassword())){
+                
+                if (pass.equals(a.getPassword())) {
                     this.setUser(email);
-                }
-                else throw new PassErradaException("Password incorreta!");
-            }
-            else throw new EmailErradoException("Email errado!");
+                } else 
+                    throw new PassErradaException("Password incorreta!");
+            } else
+                throw new EmailErradoException("Email errado!");
         }   
-    }
-    
-    //consultar evento por id
-    public Evento getEvento(int id){
-        if(this.eventos.containsKey(id)) return this.eventos.get(id);
-        return null;
-    }
-   
-    
-    
-    
-    
-    
-    
+    } 
 }

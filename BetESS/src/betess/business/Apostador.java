@@ -12,23 +12,23 @@ import java.util.Map;
  *
  * @author tiagoalves
  */
-public class Apostador extends Utilizador{
+public class Apostador extends Utilizador {
     
     private String nome;
     private double essCoins;
-    private Map<Integer,Aposta> apostas;
+    private Map<Integer, Aposta> apostas;
 
     public Apostador(String email, String nome, String password, double essCoins) {
-        super(email,password);
+        super(email, password);
         this.nome = nome;
         this.essCoins = essCoins;
         this.apostas = new HashMap<>();
     }
     
-    public Apostador(Apostador a){
+    public Apostador(Apostador a) {
         super(a.getEmail(), a.getPassword());
-        this.nome = a.nome;
-        this.essCoins = a.essCoins;
+        this.nome = a.getNome();
+        this.essCoins = a.getEssCoins();
         this.apostas = a.getApostas();
     }
 
@@ -37,6 +37,11 @@ public class Apostador extends Utilizador{
         this.apostas = new HashMap<>();
     }
 
+    /**
+     * Getters e Setters
+     * @return 
+     */
+    
     public String getNome() {
         return nome;
     }
@@ -55,21 +60,29 @@ public class Apostador extends Utilizador{
 
     public Map<Integer, Aposta> getApostas() {
         Map<Integer,Aposta> aps = new HashMap<>();
-        this.apostas.entrySet().forEach((m) -> {
+        
+        this.apostas.entrySet().forEach(m -> {
             aps.put(m.getKey(), m.getValue());
         });
+        
         return aps;
     }
 
     public void setApostas(Map<Integer, Aposta> aps) {
-        aps.entrySet().forEach((m) -> {
+        aps.entrySet().forEach(m -> {
             this.apostas.put(m.getKey(), m.getValue());
         });
     }
 
+    /**
+     * Método toString().
+     * Retorna uma representação textual do objeto.
+     * @return 
+     */
     @Override
     public String toString() {
-        return "Apostador{" + "nome=" + nome + ", essCoins=" + essCoins + ", apostas=" + apostas + '}';
+        return "Apostador{ " + "nome=" + this.nome + 
+               ", essCoins=" + this.essCoins + ", apostas=" + this.apostas + " }";
     }
     
     //quando o apostador clica em "submeter aposta" é fechada uma aposta, e quando
@@ -79,26 +92,17 @@ public class Apostador extends Utilizador{
     // "submeter aposta". 
     
     //adicionar evento a aposta
-    public void addEventoToAposta(Evento e, boolean novaAposta, int idAposta){
-        if(novaAposta){
+    public void addEventoToAposta(Evento e, boolean novaAposta, int idAposta) {
+        if (novaAposta) {
             Aposta a = new Aposta(idAposta);
             a.addEventoToAposta(e);
-        }
-        else{
+        } else{
             this.apostas.get(idAposta).addEventoToAposta(e);
         }
     }
     
-    //para saber qual o novo id de aposta
-    public int getIdNovaAposta(){
+    // para saber qual o novo id de aposta
+    public int getIdNovaAposta() {
         return this.apostas.size() + 1;
     }
-    
-     
-    
-    
-    
-    
-    
-    
 }

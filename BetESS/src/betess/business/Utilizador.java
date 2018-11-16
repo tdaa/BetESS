@@ -14,16 +14,19 @@ public class Utilizador {
     private String email;
     private String password;
     
-    public Utilizador(){    
-    }
+    public Utilizador() { }
 
     public Utilizador(String email, String password) {
         this.email = email;
         this.password = password;
     }
 
+    /**
+     * Getters e Setters.
+     * @return 
+     */
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -31,13 +34,10 @@ public class Utilizador {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
-    
 }
