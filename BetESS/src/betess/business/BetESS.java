@@ -141,5 +141,61 @@ public class BetESS {
             } else
                 throw new EmailErradoException("Email errado!");
         }   
-    } 
+    }
+    
+
+    /**
+     * Adiciona uma aposta a uma lista de apostas de um determinado apostador.
+     * 
+     * @param userEmail
+     * @param aposta
+     */
+
+    public void novaAposta(String userEmail, Aposta aposta){
+        this.apostadores.get(userEmail).addAposta(aposta);
+    }
+    
+    /* Métodos Admin */
+
+    /**
+     *
+     * @param equipaUm
+     * @param equipaDois
+     * @param oddUm
+     * @param oddX
+     * @param oddDois
+     */
+    
+    public void novoEvento(String equipaUm, String equipaDois, double oddUm, double oddX, double oddDois){
+        Evento evento = new Evento(this.eventos.size()+1, equipaUm, equipaDois, oddUm, oddDois, oddX, "aberto", "-");
+        this.eventos.put(evento.getIdEvento(), evento);
+    }
+    
+    /**
+     * Altera o estado de um evento de aberto para fechado.
+     * @param idEvento
+     */
+    public void alteraEstadoEvento(int idEvento){
+        if(this.eventos.containsKey(idEvento))
+            this.eventos.get(idEvento).setEstado("fechado");
+    }
+    
+    /**
+     * Atualiza o resultado de um evento.
+     * @param idEvento
+     * @param resultado
+     */
+    public void novoResultado(int idEvento, String resultado){
+        if(this.eventos.containsKey(idEvento))
+            this.eventos.get(idEvento).setResultado(resultado);
+    }
+    
+    /**
+     * Remove um determinado evento da lista de eventos.
+     * @param idEvento
+     */
+    public void removeEvento(int idEvento){
+        if(this.eventos.containsKey(idEvento))
+            this.eventos.remove(idEvento);
+    }
 }

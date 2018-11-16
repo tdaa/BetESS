@@ -105,4 +105,9 @@ public class Apostador extends Utilizador {
     public int getIdNovaAposta() {
         return this.apostas.size() + 1;
     }
+    
+    /* Adiciona uma nova aposta à sua lista */
+    public void addAposta(Aposta a) {
+        this.apostas.put(this.apostas.size()+1, a);
+    }
 }
