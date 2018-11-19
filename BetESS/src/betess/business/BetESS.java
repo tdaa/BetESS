@@ -5,9 +5,14 @@
  */
 package betess.business;
 
+import com.google.gson.*;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
+
 
 /**
  *
@@ -191,11 +196,34 @@ public class BetESS {
     }
     
     /**
-     * Remove um determinado evento da lista de eventos.
+     * Remove um determinado evento da lnista de eventos.
      * @param idEvento
      */
     public void removeEvento(int idEvento){
         if(this.eventos.containsKey(idEvento))
             this.eventos.remove(idEvento);
+    }
+    
+    /**
+     * Importa eventos vindos de um ficheiro JSon.
+     */
+    public void carregaEventos(){
+        JsonParser parser = new JsonParser();
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("eventos.json");
+        Reader reader = new InputStreamReader(inputStream);
+        JsonElement rootElement = parser.parse(reader);
+        JsonObject rootObject = rootElement.getAsJsonObject();
+        JsonArray evs = rootObject.getAsJsonArray("Professores");
+        for(int i=0; i<evs.size(); i++){
+            JsonObject item = evs.get(i).getAsJsonObject();
+            int idEvento = item.get("id").getAsInt();
+            String equipaUm = item.get("equipaUm").getAsString();
+            String equipaDois = item.get("equipaDois").getAsString();
+            double oddUm = item.get("oddUm").getAsDouble();
+            double oddX = item.get("oddX").getAsDouble();
+            double oddDois = item.get("oddDois").getAsDouble();
+            Evento e = new Evento(idEvento, equipaUm, equipaDois, oddUm, oddDois, oddX, "aberto", "-");
+            this.eventos.put(idEvento, e);
+        }
     }
 }
