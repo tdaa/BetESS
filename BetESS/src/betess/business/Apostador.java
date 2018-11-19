@@ -85,29 +85,23 @@ public class Apostador extends Utilizador {
                ", essCoins=" + this.essCoins + ", apostas=" + this.apostas + " }";
     }
     
-    //quando o apostador clica em "submeter aposta" é fechada uma aposta, e quando
-    //quiser adicionar um outro evento a uma aposta, esta aposta terá que ser nova.
-    //Para verificar se é aposta nova ou não, terá que ser guardado um boolean na frame a dizer
-    // que é suposto ser criada uma aposta nova, e que é colocado a true quando clica em
-    // "submeter aposta". 
-    
-    //adicionar evento a aposta
-    public void addEventoToAposta(Evento e, boolean novaAposta, int idAposta) {
-        if (novaAposta) {
-            Aposta a = new Aposta(idAposta);
-            a.addEventoToAposta(e);
-        } else{
-            this.apostas.get(idAposta).addEventoToAposta(e);
-        }
-    }
-    
-    // para saber qual o novo id de aposta
+
+    /**
+     * 
+     * @return Identificador para uma nova aposta,
+     */
     public int getIdNovaAposta() {
         return this.apostas.size() + 1;
     }
     
     /* Adiciona uma nova aposta à sua lista */
-    public void addAposta(Aposta a) {
-        this.apostas.put(this.apostas.size()+1, a);
+
+    /**
+     *
+     * @param aposta
+     */
+
+    public void addAposta(Aposta aposta) {
+        this.apostas.put(this.apostas.size()+1, aposta);
     }
 }
