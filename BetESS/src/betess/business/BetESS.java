@@ -113,6 +113,17 @@ public class BetESS {
         return e;
     }
     
+    /**
+     *
+     * @param email
+     * @return Apostador dado o seu email.
+     */
+    public Apostador getApostador(String email){
+        if(this.apostadores.containsKey(email))
+            return this.apostadores.get(email);
+        else return null;
+    }
+    
     /* Registo */
     public boolean registo(String email, String nome, String pass, double coins) {
         boolean auth = false;
@@ -209,11 +220,11 @@ public class BetESS {
      */
     public void carregaEventos(){
         JsonParser parser = new JsonParser();
-        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("eventos.json");
+        InputStream inputStream = getClass().getClassLoader().getResourceAsStream("betess/business/Eventos.json");
         Reader reader = new InputStreamReader(inputStream);
         JsonElement rootElement = parser.parse(reader);
         JsonObject rootObject = rootElement.getAsJsonObject();
-        JsonArray evs = rootObject.getAsJsonArray("Professores");
+        JsonArray evs = rootObject.getAsJsonArray("Eventos");
         for(int i=0; i<evs.size(); i++){
             JsonObject item = evs.get(i).getAsJsonObject();
             int idEvento = item.get("id").getAsInt();
