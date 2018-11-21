@@ -113,50 +113,61 @@ public class BetESS {
         return e;
     }
     
-    /**
-     *
-     * @param email
-     * @return Apostador dado o seu email.
-     */
     public Apostador getApostador(String email){
         if(this.apostadores.containsKey(email))
             return this.apostadores.get(email);
         else return null;
     }
     
-    /* Registo */
-    public boolean registo(String email, String nome, String pass, double coins) {
-        boolean auth = false;
-        
+    /**
+     * 
+     * 
+     * @param email
+     * @param nome
+     * @param pass
+     * @param coins
+     * @return 
+     */
+    public void registo(String email, String nome, String pass, double coins) 
+           throws RegistoInvalidoException
+    {   
         if (!this.apostadores.containsKey(email)) {
             Apostador a = new Apostador(email, nome, pass, coins);
             this.apostadores.put(email, a);
-            
-            auth = true;
-        }
-        
-        // retorno boolean para saberes se inseriu com sucesso ou não.
-        return auth;
+        } else throw new RegistoInvalidoException("Utilizador já registado!");
     }
     
-    /* Login */
-    public void login(String email, String pass) 
+    /**
+     * 
+     * @param email
+     * @param pass
+     * @return
+     * @throws EmailErradoException
+     * @throws PassErradaException 
+     */
+    public int login(String email, String pass) 
            throws EmailErradoException, PassErradaException 
     {
-        if (email.equals("betAdmin@di.pt") && pass.equals("betAdmin")) {
+        int estatuto;
+        
+        if (email.equals("betadmin@betess.pt") && pass.equals("betadmin")) {
             Admin a = new Admin();
             this.setUser(email);
+            estatuto = 0;
         } else {
             if (this.apostadores.containsKey(email)) {
                 Apostador a = this.apostadores.get(email);
                 
                 if (pass.equals(a.getPassword())) {
                     this.setUser(email);
+                    estatuto = 1;
                 } else 
                     throw new PassErradaException("Password incorreta!");
             } else
                 throw new EmailErradoException("Email errado!");
-        }   
+        }
+        
+        return estatuto;
     }
     
 
@@ -166,48 +177,55 @@ public class BetESS {
      * @param userEmail
      * @param aposta
      */
-
     public void novaAposta(String userEmail, Aposta aposta){
         this.apostadores.get(userEmail).addAposta(aposta);
     }
     
-    /* Métodos Admin */
+    
+    /* ********************************************* *
+     * Conjunto de métodos chamados pelo MenuAdmin.  *
+     * ********************************************* */
 
     /**
-     *
+     * Cria um novo evento, e adiciona-o a respetiva estrutura de dados.
+     * 
      * @param equipaUm
      * @param equipaDois
      * @param oddUm
      * @param oddX
      * @param oddDois
-     */
-    
-    public void novoEvento(String equipaUm, String equipaDois, double oddUm, double oddX, double oddDois){
+     */  
+    public void novoEvento(String equipaUm, String equipaDois, double oddUm, 
+                           double oddX, double oddDois)
+    {
         Evento evento = new Evento(this.eventos.size()+1, equipaUm, equipaDois, oddUm, oddDois, oddX, "aberto", "-");
         this.eventos.put(evento.getIdEvento(), evento);
     }
     
     /**
      * Altera o estado de um evento de aberto para fechado.
+     * 
      * @param idEvento
      */
-    public void alteraEstadoEvento(int idEvento){
-        if(this.eventos.containsKey(idEvento))
+    public void alteraEstadoEvento(int idEvento) {
+        if (this.eventos.containsKey(idEvento))
             this.eventos.get(idEvento).setEstado("fechado");
     }
     
     /**
      * Atualiza o resultado de um evento.
+     * 
      * @param idEvento
      * @param resultado
      */
-    public void novoResultado(int idEvento, String resultado){
-        if(this.eventos.containsKey(idEvento))
+    public void novoResultado(int idEvento, String resultado) {
+        if (this.eventos.containsKey(idEvento))
             this.eventos.get(idEvento).setResultado(resultado);
     }
     
     /**
      * Remove um determinado evento da lnista de eventos.
+     * 
      * @param idEvento
      */
     public void removeEvento(int idEvento){
@@ -216,23 +234,26 @@ public class BetESS {
     }
     
     /**
-     * Importa eventos vindos de um ficheiro JSon.
+     * Importa eventos vindos de um ficheiro JSON.
      */
-    public void carregaEventos(){
+    public void carregaEventos() {
         JsonParser parser = new JsonParser();
         InputStream inputStream = getClass().getClassLoader().getResourceAsStream("betess/business/Eventos.json");
         Reader reader = new InputStreamReader(inputStream);
         JsonElement rootElement = parser.parse(reader);
         JsonObject rootObject = rootElement.getAsJsonObject();
         JsonArray evs = rootObject.getAsJsonArray("Eventos");
-        for(int i=0; i<evs.size(); i++){
+        
+        for (int i = 0; i < evs.size(); i++) {
             JsonObject item = evs.get(i).getAsJsonObject();
+            
             int idEvento = item.get("id").getAsInt();
             String equipaUm = item.get("equipaUm").getAsString();
             String equipaDois = item.get("equipaDois").getAsString();
             double oddUm = item.get("oddUm").getAsDouble();
             double oddX = item.get("oddX").getAsDouble();
             double oddDois = item.get("oddDois").getAsDouble();
+            
             Evento e = new Evento(idEvento, equipaUm, equipaDois, oddUm, oddDois, oddX, "aberto", "-");
             this.eventos.put(idEvento, e);
         }

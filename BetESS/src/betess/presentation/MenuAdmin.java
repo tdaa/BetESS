@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package betess.presentation;
 
 import betess.business.BetESS;
@@ -11,26 +6,33 @@ import java.util.Map;
 import javax.swing.DefaultListModel;
 
 /**
- *
- * @author tiagoalves
+ * MenuAdmin => Interface do menu principal do Administrador.
+ * 
+ * @author Manuel Sousa
+ * @author Tiago Alves
  */
-public class HomeAdmin extends javax.swing.JFrame {
+public class MenuAdmin extends javax.swing.JFrame {
     
     private BetESS betEss;
+    
     /**
-     * Creates new form HomeAdmin
+     * Construtor de um novo MenuAdmin.
+     * 
+     * @param betEss
      */
-    public HomeAdmin(BetESS b) {
-        this.betEss = b;
+    public MenuAdmin(BetESS betEss) {
+        this.betEss = betEss;
         initComponents();
         atualizaLista();
     }
     
-    public void atualizaLista(){
+    public void atualizaLista() {
         DefaultListModel<String> dlm = new DefaultListModel<>();
-        for(Map.Entry<Integer,Evento> m: this.betEss.getEventos().entrySet()){
+        
+        for (Map.Entry<Integer,Evento> m: this.betEss.getEventos().entrySet()) {
             dlm.addElement(m.getKey().toString() + " - " + m.getValue().getEquipaUm() + " vs " + m.getValue().getEquipaDois());
         }
+        
         this.listaEventos.setModel(dlm);
     }
 
