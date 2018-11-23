@@ -5,11 +5,13 @@
  */
 package betess.business;
 
+import java.io.Serializable;
+
 /**
  *
  * @author tiagoalves
  */
-public class Utilizador {
+public class Utilizador implements Serializable{
     
     private String email;
     private String password;

@@ -12,7 +12,7 @@ import java.util.Map;
  *
  * @author tiagoalves
  */
-public class Apostador extends Utilizador {
+public class Apostador extends Utilizador{
     
     private String nome;
     private double essCoins;

@@ -1,6 +1,7 @@
 package betess.presentation;
 
 import betess.business.BetESS;
+import betess.data.BetESSData;
 
 /**
  * Classe Main.
@@ -17,10 +18,15 @@ public class Main {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        BetESS betEss = new BetESS();
+        //BetESS betEss = new BetESSData().readData("BetData");
+        BetESS betEss = new BetESS().startApp();
         LoginFrame lf = new LoginFrame(betEss);
         
         lf.setLocationRelativeTo(null);
         lf.setVisible(true);
+        lf.setFocusableWindowState(true);
+        
+        
+        
     }
 }

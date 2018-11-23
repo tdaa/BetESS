@@ -127,7 +127,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("Concordo com os termos e condições");
 
-        jPanel_RegistarBtn.setBackground(new java.awt.Color(97, 212, 195));
+        jPanel_RegistarBtn.setBackground(new java.awt.Color(204, 204, 204));
         jPanel_RegistarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel_RegistarBtnMouseClicked(evt);
@@ -292,10 +292,10 @@ public class LoginFrame extends javax.swing.JFrame {
             menu.setVisible(true);
             this.dispose();
         } else if (estatuto == 1) {
-            //MenuApostador menu = new MenuApostador(this.betEss);
-            //menu.setLocationRelativeTo(null);
-            //menu.setVisible(true);
-            //this.dispose();
+            MenuApostador menu = new MenuApostador(this.betEss);
+            menu.setLocationRelativeTo(null);
+            menu.setVisible(true);
+            this.dispose();
         }
     }//GEN-LAST:event_jLabel_LoginMouseClicked
 

@@ -5,11 +5,13 @@
  */
 package betess.business;
 
+import java.io.Serializable;
+
 /**
  *
  * @author tiagoalves
  */
-public class Evento {
+public class Evento implements Serializable{
     
     private int idEvento;
     private String equipaUm;

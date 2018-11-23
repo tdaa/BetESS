@@ -5,10 +5,12 @@
  */
 package betess.business;
 
+import betess.data.BetESSData;
 import com.google.gson.*;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -18,18 +20,20 @@ import java.util.Map;
  *
  * @author tiagoalves
  */
-public class BetESS {
+public class BetESS implements Serializable{
 
     private String user;
     private Map<String, Apostador> apostadores;
     private Map<Integer, Evento> eventos;
     private Map<String, LinkedList<Aposta>> apostas;
+    private BetESSData bed;
 
     public BetESS() {
         this.user = "";
         this.apostadores = new HashMap<>();
         this.eventos = new HashMap<>();
         this.apostas = new HashMap<>();
+        this.bed = new BetESSData();
     }
 
     /**
@@ -127,6 +131,7 @@ public class BetESS {
      * @param pass
      * @param coins
      * @return 
+     * @throws betess.business.RegistoInvalidoException 
      */
     public void registo(String email, String nome, String pass, double coins) 
            throws RegistoInvalidoException
@@ -258,4 +263,20 @@ public class BetESS {
             this.eventos.put(idEvento, e);
         }
     }
+    
+    /**
+     *
+     * @return Objeto com estado guardado anteriormente.
+     */
+    public BetESS startApp(){
+        return this.bed.readData("BetData", this);
+    }
+
+    /**
+     * Guarda o estado de todo o sistema num ficheiro "BetData".
+     */
+    public void endApp(){
+        this.bed.writeData("BetData", this);
+    }
+    
 }
