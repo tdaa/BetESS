@@ -5,6 +5,7 @@
  */
 package betess.business;
 
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,7 +13,7 @@ import java.util.Map;
  *
  * @author tiagoalves
  */
-public class Aposta {
+public class Aposta implements Serializable{
     
     private int idAposta;
     private Map<Integer, Evento> eventos;
