@@ -1,11 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package betess.business;
 
-import betess.data.BetESSData;
+import betess.data.DataBetESS;
 import com.google.gson.*;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -17,23 +12,27 @@ import java.util.Map;
 
 
 /**
+ * Classe BetESS - Interage com os dados da aplicação.
+ * É aqui que são guardadas as estruturas de dados que contêm toda a
+ * informação relativa ao sistema.
  *
- * @author tiagoalves
+ * @author Manuel Sousa
+ * @author Tiago Alves
  */
-public class BetESS implements Serializable{
+public class BetESS implements Serializable {
 
     private String user;
     private Map<String, Apostador> apostadores;
     private Map<Integer, Evento> eventos;
     private Map<String, LinkedList<Aposta>> apostas;
-    private BetESSData bed;
+    private DataBetESS bd;
 
     public BetESS() {
         this.user = "";
         this.apostadores = new HashMap<>();
         this.eventos = new HashMap<>();
         this.apostas = new HashMap<>();
-        this.bed = new BetESSData();
+        this.bd = new DataBetESS();
     }
 
     /**
@@ -130,7 +129,6 @@ public class BetESS implements Serializable{
      * @param nome
      * @param pass
      * @param coins
-     * @return 
      * @throws betess.business.RegistoInvalidoException 
      */
     public void registo(String email, String nome, String pass, double coins) 
@@ -175,7 +173,6 @@ public class BetESS implements Serializable{
         return estatuto;
     }
     
-
     /**
      * Adiciona uma aposta a uma lista de apostas de um determinado apostador.
      * 
@@ -268,15 +265,15 @@ public class BetESS implements Serializable{
      *
      * @return Objeto com estado guardado anteriormente.
      */
-    public BetESS startApp(){
-        return this.bed.readData("BetData", this);
+    public BetESS startApp() {
+        return this.bd.readData("betdata.obj", this);
     }
-
+    
     /**
-     * Guarda o estado de todo o sistema num ficheiro "BetData".
+     * Guarda o estado de todo o sistema num ficheiro "betdata".
      */
-    public void endApp(){
-        this.bed.writeData("BetData", this);
+    public void endApp() {
+        this.bd.writeData("betdata.obj", this);
     }
     
 }

@@ -2,7 +2,8 @@ package betess.business;
 
 /**
  *
- * @author gcsousa
+ * @author Manuel Sousa
+ * @author Tiago Alves
  */
 public class RegistoInvalidoException extends Exception {
     

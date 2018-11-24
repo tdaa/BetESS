@@ -1,7 +1,6 @@
 package betess.presentation;
 
 import betess.business.BetESS;
-import betess.data.BetESSData;
 
 /**
  * Classe Main.
@@ -25,8 +24,6 @@ public class Main {
         lf.setLocationRelativeTo(null);
         lf.setVisible(true);
         lf.setFocusableWindowState(true);
-        
-        
-        
     }
+    
 }
