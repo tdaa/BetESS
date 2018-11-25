@@ -60,6 +60,7 @@ public class LoginFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 102, 102));
         jPanel2.setToolTipText("[97,212,195]");
@@ -83,6 +84,8 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel_BetESS_Logo.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_BetESS_Logo.setText("BetESS");
         jPanel2.add(jLabel_BetESS_Logo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 210, 160, 70));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 430, 567));
 
         jPanel5.setBackground(new java.awt.Color(36, 47, 65));
 
@@ -127,7 +130,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jCheckBox1.setSelected(true);
         jCheckBox1.setText("Concordo com os termos e condições");
 
-        jPanel_RegistarBtn.setBackground(new java.awt.Color(204, 204, 204));
+        jPanel_RegistarBtn.setBackground(new java.awt.Color(255, 102, 102));
         jPanel_RegistarBtn.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jPanel_RegistarBtnMouseClicked(evt);
@@ -140,13 +143,14 @@ public class LoginFrame extends javax.swing.JFrame {
         jLabel9.setText("EMAIL");
         jPanel_RegistarBtn.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 330, -1, -1));
 
+        jLabel_Registar.setBackground(new java.awt.Color(255, 255, 255));
         jLabel_Registar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         jLabel_Registar.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_Registar.setText("Registar");
         jPanel_RegistarBtn.add(jLabel_Registar, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 10, -1, -1));
 
         jLabel_Login.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        jLabel_Login.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel_Login.setForeground(new java.awt.Color(255, 255, 255));
         jLabel_Login.setText("Já sou membro");
         jLabel_Login.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -181,7 +185,7 @@ public class LoginFrame extends javax.swing.JFrame {
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(0, 74, Short.MAX_VALUE)
+                .addGap(0, 75, Short.MAX_VALUE)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jPanel_RegistarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -203,12 +207,12 @@ public class LoginFrame extends javax.swing.JFrame {
                                 .addComponent(jLabel_Password)
                                 .addComponent(jLabel_Email)
                                 .addComponent(emailTextField, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 84, Short.MAX_VALUE))))
+                        .addGap(0, 85, Short.MAX_VALUE))))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 84, Short.MAX_VALUE)
                 .addComponent(jLabel3)
                 .addGap(36, 36, 36)
                 .addComponent(jLabel_Nome)
@@ -237,23 +241,10 @@ public class LoginFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 11, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel_RegistarBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 85, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 420, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, 567, Short.MAX_VALUE)
-            .addComponent(jPanel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
+        getContentPane().add(jPanel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(424, 0, 430, 567));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

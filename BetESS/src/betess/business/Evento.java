@@ -1,17 +1,13 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package betess.business;
 
 import java.io.Serializable;
 
 /**
  *
- * @author tiagoalves
+ * @author Manuel Sousa
+ * @author Tiago Alves
  */
-public class Evento implements Serializable{
+public class Evento implements Serializable {
     
     private int idEvento;
     private String equipaUm;

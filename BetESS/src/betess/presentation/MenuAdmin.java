@@ -149,6 +149,11 @@ public class MenuAdmin extends javax.swing.JFrame {
         });
 
         LogoutButton.setText("Logout");
+        LogoutButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                LogoutButtonActionPerformed(evt);
+            }
+        });
 
         apostadoresButton.setText("Consultar Apostadores");
         apostadoresButton.addActionListener(new java.awt.event.ActionListener() {
@@ -235,6 +240,14 @@ public class MenuAdmin extends javax.swing.JFrame {
         fa.setVisible(true);
     }//GEN-LAST:event_apostadoresButtonActionPerformed
 
+    private void LogoutButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_LogoutButtonActionPerformed
+        this.dispose();
+        LoginFrame lf = new LoginFrame(this.betEss);
+        
+        lf.setLocationRelativeTo(null);
+        lf.setVisible(true);
+        lf.setFocusableWindowState(true);
+    }//GEN-LAST:event_LogoutButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LogoutButton;

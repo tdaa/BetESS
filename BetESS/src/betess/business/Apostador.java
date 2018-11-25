@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package betess.business;
 
 import java.util.HashMap;
@@ -10,9 +5,10 @@ import java.util.Map;
 
 /**
  *
- * @author tiagoalves
+ * @author Manuel Sousa
+ * @author Tiago Alves
  */
-public class Apostador extends Utilizador{
+public class Apostador extends Utilizador {
     
     private String nome;
     private double essCoins;
@@ -43,7 +39,7 @@ public class Apostador extends Utilizador{
      */
     
     public String getNome() {
-        return nome;
+        return this.nome;
     }
 
     public void setNome(String nome) {
@@ -51,7 +47,7 @@ public class Apostador extends Utilizador{
     }
 
     public double getEssCoins() {
-        return essCoins;
+        return this.essCoins;
     }
 
     public void setEssCoins(double essCoins) {
@@ -85,7 +81,6 @@ public class Apostador extends Utilizador{
                ", essCoins=" + this.essCoins + ", apostas=" + this.apostas + " }";
     }
     
-
     /**
      * 
      * @return Identificador para uma nova aposta,
@@ -100,7 +95,6 @@ public class Apostador extends Utilizador{
      *
      * @param aposta
      */
-
     public void addAposta(Aposta aposta) {
         this.apostas.put(this.apostas.size()+1, aposta);
     }

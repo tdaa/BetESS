@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package betess.data;
 
 import betess.business.BetESS;
@@ -15,27 +10,33 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- *
- * @author tiagoalves
+ * Classe DataBetESS.
+ * Nesta classe são invocados os métodos necessários para guardar
+ * o estado da aplicação.
+ * 
+ * @author Manuel Sousa
+ * @author Tiago Alves
  */
-public class BetESSData implements Serializable{
+public class DataBetESS implements Serializable {
 
-    public BetESSData() {}
+    public DataBetESS() { } 
     
     /**
      *
      * @param fileName
      * @param system
      */
-    public void writeData(String fileName, BetESS system){
+    public void writeData(String fileName, BetESS system) {
         try {
             FileOutputStream fos = new FileOutputStream(fileName);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
+            
             oos.writeObject(system);
             oos.flush();
             oos.close();
-            System.out.println("Guardado!");
-	} catch (Exception e) {
+            
+            System.out.println("Guardado com sucesso!");
+	} catch (IOException e) {
             System.out.println(e.getMessage());
 	}
     }
@@ -46,21 +47,25 @@ public class BetESSData implements Serializable{
      * @param b
      * @return
      */
-    public BetESS readData(String fileName, BetESS b){
+    public BetESS readData(String fileName, BetESS b) {
         BetESS betEss = b;
+        
         try {
             File f = new File(fileName);
-            if (f.exists()){
+            
+            if (f.exists()) {
                 FileInputStream fis = new FileInputStream(fileName);
                 ObjectInputStream ois = new ObjectInputStream(fis);
+                
                 betEss = (BetESS) ois.readObject();
                 ois.close();
-                System.out.println("Successfully loaded state.");
+                
+                System.out.println("Estado importado com sucesso!");
             }
         } catch (IOException | ClassNotFoundException e) {
             System.out.println(e.getMessage());
         }
+        
         return betEss;
-    }
-    
+    }   
 }

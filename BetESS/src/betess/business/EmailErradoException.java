@@ -2,7 +2,8 @@ package betess.business;
 
 /**
  *
- * @author tiagoalves
+ * @author Manuel Sousa
+ * @author Tiago Alves
  */
 public class EmailErradoException extends Exception {
     

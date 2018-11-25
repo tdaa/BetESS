@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package betess.business;
 
 import java.io.Serializable;
@@ -11,18 +6,17 @@ import java.util.Map;
 
 /**
  *
- * @author tiagoalves
+ * @author Manuel Sousa
+ * @author Tiago Alves
  */
-public class Aposta implements Serializable{
+public class Aposta implements Serializable {
     
     private int idAposta;
     private Map<Integer, Evento> eventos;
     private double valor;
 
-    public Aposta(int idAposta, Map<Integer, Evento> eventos, double valor) {
-        this.idAposta = idAposta;
-        this.setEventos(eventos);
-        this.valor = valor;
+    public Aposta() {
+        this.eventos = new HashMap<>();
     }
 
     public Aposta(int id) {
@@ -36,8 +30,10 @@ public class Aposta implements Serializable{
         this.eventos = a.getEventos();
     }
     
-    public Aposta(){
-        this.eventos = new HashMap<>();
+    public Aposta(int idAposta, Map<Integer, Evento> eventos, double valor) {
+        this.idAposta = idAposta;
+        this.setEventos(eventos);
+        this.valor = valor;
     }
 
     /**
@@ -92,5 +88,10 @@ public class Aposta implements Serializable{
     public void addEventoToAposta(Evento e) {
         if (!this.eventos.containsKey(e.getIdEvento()))
             this.eventos.put(e.getIdEvento(), e);
+    }
+    
+    // Adicionar evento a aposta
+    public void remEventoFromAposta(Evento e) {
+        this.eventos.remove(e.getIdEvento(), e);
     }
 }
