@@ -1,5 +1,6 @@
 package betess.presentation;
 
+import betess.business.Aposta;
 import betess.business.Apostador;
 import betess.business.BetESS;
 import betess.business.Evento;
@@ -17,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 public class MenuApostador extends javax.swing.JFrame {
     
     private BetESS betEss;
+    private Aposta newAposta;
     
     /**
      * Construtor de um novo MenuApostador.
@@ -25,6 +27,7 @@ public class MenuApostador extends javax.swing.JFrame {
      */
     public MenuApostador(BetESS betEss) {
         this.betEss = betEss;
+        this.newAposta = new Aposta();
         initComponents();
         
         // Adiciona Nome do Utilizador e Quantidade de Coins.
@@ -233,11 +236,11 @@ public class MenuApostador extends javax.swing.JFrame {
 
             },
             new String [] {
-                "ID", "Equipa 1", "Equipa 2", "Odd 1", "Odd 2"
+                "ID", "Equipa 1", "Equipa 2", "Odd 1", "Odd 2", "Odd X"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -501,14 +504,34 @@ public class MenuApostador extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) jTableEventos.getModel();
         int index = jTableEventos.getSelectedRow();
         
-        String id = model.getValueAt(index, 0).toString();
+        int idEvento = (int) model.getValueAt(index, 0);
+        String equipaUm = model.getValueAt(index, 1).toString();
+        String equipaDois = model.getValueAt(index, 2).toString();
+        double oddUm = (double) model.getValueAt(index, 3);
+        double oddDois = (double) model.getValueAt(index, 4);
+        double oddX = (double) model.getValueAt(index, 5);
         
-        String oldEventos = jTextHome_Eventos.getText();
-        jTextHome_Eventos.setText(oldEventos + " // " + id);
+        Evento e = new Evento(idEvento, equipaUm, equipaDois, oddUm, oddDois,
+                              oddX, "ACTIVO", "NULL");
+        
+        this.newAposta.addEventoToAposta(e);
     }//GEN-LAST:event_jPanelAddEventoMouseClicked
 
     private void jPanelRemEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelRemEventoMouseClicked
-        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTableEventos.getModel();
+        int index = jTableEventos.getSelectedRow();
+        
+        int idEvento = (int) model.getValueAt(index, 0);
+        String equipaUm = model.getValueAt(index, 1).toString();
+        String equipaDois = model.getValueAt(index, 2).toString();
+        double oddUm = (double) model.getValueAt(index, 3);
+        double oddDois = (double) model.getValueAt(index, 4);
+        double oddX = (double) model.getValueAt(index, 5);
+        
+        Evento e = new Evento(idEvento, equipaUm, equipaDois, oddUm, oddDois,
+                              oddX, "ACTIVO", "NULL");
+        
+        this.newAposta.remEventoFromAposta(e);
     }//GEN-LAST:event_jPanelRemEventoMouseClicked
 
     private void jPanelApostarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelApostarMouseClicked
@@ -569,7 +592,8 @@ public class MenuApostador extends javax.swing.JFrame {
                 e.getEquipaUm(),
                 e.getEquipaDois(),
                 e.getOddUm(),
-                e.getOddDois()     
+                e.getOddDois(),
+                e.getOddX()
             });
         });
     }
