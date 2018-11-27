@@ -6,6 +6,8 @@ import betess.business.BetESS;
 import betess.business.Evento;
 import java.awt.Color;
 import java.util.Collection;
+import javafx.scene.control.Alert;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.table.DefaultTableModel;
 
@@ -19,6 +21,7 @@ public class MenuApostador extends javax.swing.JFrame {
     
     private BetESS betEss;
     private Aposta newAposta;
+    private String user;
     
     /**
      * Construtor de um novo MenuApostador.
@@ -31,7 +34,7 @@ public class MenuApostador extends javax.swing.JFrame {
         initComponents();
         
         // Adiciona Nome do Utilizador e Quantidade de Coins.
-        String user = this.betEss.getUser();
+        this.user = this.betEss.getUser();
         setup(user);
     }
 
@@ -55,6 +58,12 @@ public class MenuApostador extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         indHome = new javax.swing.JPanel();
         jSeparator1 = new javax.swing.JSeparator();
+        jPanelAposta = new javax.swing.JPanel();
+        jLabelAposta = new javax.swing.JLabel();
+        indAposta = new javax.swing.JPanel();
+        jPanelMinhasApostas = new javax.swing.JPanel();
+        jLabelProfile1 = new javax.swing.JLabel();
+        indMinhasApostas = new javax.swing.JPanel();
         jPanelMain_Home = new javax.swing.JPanel();
         jLabelHome_Nome = new javax.swing.JLabel();
         jLabelHome_Coins = new javax.swing.JLabel();
@@ -64,12 +73,10 @@ public class MenuApostador extends javax.swing.JFrame {
         jTableEventos = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
         jTextHome_Eventos = new javax.swing.JTextField();
-        jPanelAddEvento = new javax.swing.JPanel();
-        jLabel8 = new javax.swing.JLabel();
-        jPanelRemEvento = new javax.swing.JPanel();
-        jLabel9 = new javax.swing.JLabel();
         jPanelApostar = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
+        jPanelConsultarEvento = new javax.swing.JPanel();
+        jLabel16 = new javax.swing.JLabel();
         jPanelMain_Profile = new javax.swing.JPanel();
         jTextProfile_Nome = new javax.swing.JTextField();
         jTextProfile_Email = new javax.swing.JTextField();
@@ -79,6 +86,14 @@ public class MenuApostador extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        jPanelMain_Aposta = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTableAposta = new javax.swing.JTable();
+        jLabel8 = new javax.swing.JLabel();
+        ganhos = new javax.swing.JLabel();
+        jPanelMain_MinhasApostas = new javax.swing.JPanel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableMinhasApostas = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -90,8 +105,6 @@ public class MenuApostador extends javax.swing.JFrame {
                 jPanel_BtnLogoutMouseClicked(evt);
             }
         });
-
-        jLabel7.setIcon(new javax.swing.ImageIcon("/Users/gcsousa/Desktop/Universidade/4º Ano/1º Semestre/Arquiteturas de Software - ESS/Trabalho Prático/Fase-1/Primeira-Versão/BetESS/BetESS/icons/icon-exit.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel_BtnLogoutLayout = new javax.swing.GroupLayout(jPanel_BtnLogout);
         jPanel_BtnLogout.setLayout(jPanel_BtnLogoutLayout);
@@ -142,7 +155,7 @@ public class MenuApostador extends javax.swing.JFrame {
         );
         indProfileLayout.setVerticalGroup(
             indProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGap(0, 50, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout jPanelProfileLayout = new javax.swing.GroupLayout(jPanelProfile);
@@ -151,20 +164,20 @@ public class MenuApostador extends javax.swing.JFrame {
             jPanelProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelProfileLayout.createSequentialGroup()
                 .addComponent(indProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(58, 58, 58)
+                .addGap(56, 56, 56)
                 .addComponent(jLabelProfile)
-                .addContainerGap(61, Short.MAX_VALUE))
+                .addContainerGap(63, Short.MAX_VALUE))
         );
         jPanelProfileLayout.setVerticalGroup(
             jPanelProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(indProfile, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
             .addGroup(jPanelProfileLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
+                .addGap(17, 17, 17)
                 .addComponent(jLabelProfile)
-                .addContainerGap(18, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanelMenu.add(jPanelProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 170, 50));
+        jPanelMenu.add(jPanelProfile, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 250, 170, 50));
 
         jPanelHome.setBackground(new java.awt.Color(255, 102, 102));
         jPanelHome.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -214,6 +227,96 @@ public class MenuApostador extends javax.swing.JFrame {
         jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
         jPanelMenu.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 130, -1));
 
+        jPanelAposta.setBackground(new java.awt.Color(255, 102, 102));
+        jPanelAposta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelApostaMouseClicked(evt);
+            }
+        });
+
+        jLabelAposta.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabelAposta.setText("Aposta Atual");
+
+        indAposta.setOpaque(false);
+        indAposta.setPreferredSize(new java.awt.Dimension(3, 43));
+
+        javax.swing.GroupLayout indApostaLayout = new javax.swing.GroupLayout(indAposta);
+        indAposta.setLayout(indApostaLayout);
+        indApostaLayout.setHorizontalGroup(
+            indApostaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 8, Short.MAX_VALUE)
+        );
+        indApostaLayout.setVerticalGroup(
+            indApostaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanelApostaLayout = new javax.swing.GroupLayout(jPanelAposta);
+        jPanelAposta.setLayout(jPanelApostaLayout);
+        jPanelApostaLayout.setHorizontalGroup(
+            jPanelApostaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelApostaLayout.createSequentialGroup()
+                .addComponent(indAposta, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(33, 33, 33)
+                .addComponent(jLabelAposta)
+                .addContainerGap(42, Short.MAX_VALUE))
+        );
+        jPanelApostaLayout.setVerticalGroup(
+            jPanelApostaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(indAposta, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addGroup(jPanelApostaLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabelAposta)
+                .addContainerGap(18, Short.MAX_VALUE))
+        );
+
+        jPanelMenu.add(jPanelAposta, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 170, 50));
+
+        jPanelMinhasApostas.setBackground(new java.awt.Color(255, 102, 102));
+        jPanelMinhasApostas.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelMinhasApostasMouseClicked(evt);
+            }
+        });
+
+        jLabelProfile1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabelProfile1.setText("Minhas Apostas");
+
+        indMinhasApostas.setOpaque(false);
+        indMinhasApostas.setPreferredSize(new java.awt.Dimension(3, 43));
+
+        javax.swing.GroupLayout indMinhasApostasLayout = new javax.swing.GroupLayout(indMinhasApostas);
+        indMinhasApostas.setLayout(indMinhasApostasLayout);
+        indMinhasApostasLayout.setHorizontalGroup(
+            indMinhasApostasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 8, Short.MAX_VALUE)
+        );
+        indMinhasApostasLayout.setVerticalGroup(
+            indMinhasApostasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 50, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout jPanelMinhasApostasLayout = new javax.swing.GroupLayout(jPanelMinhasApostas);
+        jPanelMinhasApostas.setLayout(jPanelMinhasApostasLayout);
+        jPanelMinhasApostasLayout.setHorizontalGroup(
+            jPanelMinhasApostasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMinhasApostasLayout.createSequentialGroup()
+                .addComponent(indMinhasApostas, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(28, 28, 28)
+                .addComponent(jLabelProfile1)
+                .addContainerGap(27, Short.MAX_VALUE))
+        );
+        jPanelMinhasApostasLayout.setVerticalGroup(
+            jPanelMinhasApostasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(indMinhasApostas, javax.swing.GroupLayout.DEFAULT_SIZE, 50, Short.MAX_VALUE)
+            .addGroup(jPanelMinhasApostasLayout.createSequentialGroup()
+                .addGap(17, 17, 17)
+                .addComponent(jLabelProfile1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        jPanelMenu.add(jPanelMinhasApostas, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 170, 50));
+
         getContentPane().add(jPanelMenu, new org.netbeans.lib.awtextra.AbsoluteConstraints(-3, 0, -1, 680));
 
         jPanelMain_Home.setBackground(new java.awt.Color(36, 47, 65));
@@ -256,62 +359,6 @@ public class MenuApostador extends javax.swing.JFrame {
 
         jTextHome_Eventos.setEditable(false);
 
-        jPanelAddEvento.setBackground(new java.awt.Color(255, 102, 102));
-        jPanelAddEvento.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelAddEventoMouseClicked(evt);
-            }
-        });
-
-        jLabel8.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setText("Adicionar Evento");
-
-        javax.swing.GroupLayout jPanelAddEventoLayout = new javax.swing.GroupLayout(jPanelAddEvento);
-        jPanelAddEvento.setLayout(jPanelAddEventoLayout);
-        jPanelAddEventoLayout.setHorizontalGroup(
-            jPanelAddEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAddEventoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel8)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelAddEventoLayout.setVerticalGroup(
-            jPanelAddEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddEventoLayout.createSequentialGroup()
-                .addContainerGap(18, Short.MAX_VALUE)
-                .addComponent(jLabel8)
-                .addGap(17, 17, 17))
-        );
-
-        jPanelRemEvento.setBackground(new java.awt.Color(255, 102, 102));
-        jPanelRemEvento.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelRemEventoMouseClicked(evt);
-            }
-        });
-
-        jLabel9.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setText("Remover Evento");
-
-        javax.swing.GroupLayout jPanelRemEventoLayout = new javax.swing.GroupLayout(jPanelRemEvento);
-        jPanelRemEvento.setLayout(jPanelRemEventoLayout);
-        jPanelRemEventoLayout.setHorizontalGroup(
-            jPanelRemEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRemEventoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelRemEventoLayout.setVerticalGroup(
-            jPanelRemEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRemEventoLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel9)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-
         jPanelApostar.setBackground(new java.awt.Color(255, 102, 102));
         jPanelApostar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -337,6 +384,34 @@ public class MenuApostador extends javax.swing.JFrame {
             .addGroup(jPanelApostarLayout.createSequentialGroup()
                 .addGap(16, 16, 16)
                 .addComponent(jLabel10)
+                .addContainerGap(15, Short.MAX_VALUE))
+        );
+
+        jPanelConsultarEvento.setBackground(new java.awt.Color(255, 102, 102));
+        jPanelConsultarEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelConsultarEventoMouseClicked(evt);
+            }
+        });
+
+        jLabel16.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setText("Consultar evento");
+
+        javax.swing.GroupLayout jPanelConsultarEventoLayout = new javax.swing.GroupLayout(jPanelConsultarEvento);
+        jPanelConsultarEvento.setLayout(jPanelConsultarEventoLayout);
+        jPanelConsultarEventoLayout.setHorizontalGroup(
+            jPanelConsultarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelConsultarEventoLayout.createSequentialGroup()
+                .addContainerGap(22, Short.MAX_VALUE)
+                .addComponent(jLabel16)
+                .addGap(19, 19, 19))
+        );
+        jPanelConsultarEventoLayout.setVerticalGroup(
+            jPanelConsultarEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelConsultarEventoLayout.createSequentialGroup()
+                .addGap(14, 14, 14)
+                .addComponent(jLabel16)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -363,14 +438,13 @@ public class MenuApostador extends javax.swing.JFrame {
                                     .addComponent(jTextHome_Eventos))))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelMain_HomeLayout.createSequentialGroup()
-                        .addGroup(jPanelMain_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(jPanelMain_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanelMain_HomeLayout.createSequentialGroup()
-                                .addComponent(jPanelAddEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(127, 127, 127)
-                                .addComponent(jPanelRemEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jPanelApostar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 619, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(124, 124, 124)
+                                .addComponent(jPanelConsultarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(84, 84, 84)
+                                .addComponent(jPanelApostar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(205, Short.MAX_VALUE))))
         );
         jPanelMain_HomeLayout.setVerticalGroup(
@@ -390,12 +464,11 @@ public class MenuApostador extends javax.swing.JFrame {
                     .addComponent(jLabel6))
                 .addGap(35, 35, 35)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addGap(18, 18, 18)
                 .addGroup(jPanelMain_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanelAddEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelRemEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelApostar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(54, Short.MAX_VALUE))
+                    .addComponent(jPanelConsultarEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelApostar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelMain_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 0, 890, 680));
@@ -461,10 +534,111 @@ public class MenuApostador extends javax.swing.JFrame {
                 .addGroup(jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextProfile_Coins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(408, Short.MAX_VALUE))
+                .addContainerGap(414, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelMain_Profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 890, 680));
+
+        jPanelMain_Aposta.setBackground(new java.awt.Color(36, 47, 65));
+        jPanelMain_Aposta.setPreferredSize(new java.awt.Dimension(840, 617));
+
+        jTableAposta.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jTableAposta.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jTableAposta.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Equipa Casa", "Equipa Fora", "Odd Apostada"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTableAposta);
+
+        jLabel8.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(204, 204, 204));
+        jLabel8.setText("Ganhos Possíveis:");
+
+        ganhos.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        ganhos.setForeground(new java.awt.Color(255, 255, 255));
+        ganhos.setText(String.valueOf(this.newAposta.getValor())
+        );
+
+        javax.swing.GroupLayout jPanelMain_ApostaLayout = new javax.swing.GroupLayout(jPanelMain_Aposta);
+        jPanelMain_Aposta.setLayout(jPanelMain_ApostaLayout);
+        jPanelMain_ApostaLayout.setHorizontalGroup(
+            jPanelMain_ApostaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMain_ApostaLayout.createSequentialGroup()
+                .addGap(192, 192, 192)
+                .addGroup(jPanelMain_ApostaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelMain_ApostaLayout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(ganhos))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(194, Short.MAX_VALUE))
+        );
+        jPanelMain_ApostaLayout.setVerticalGroup(
+            jPanelMain_ApostaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMain_ApostaLayout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanelMain_ApostaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(ganhos))
+                .addContainerGap(158, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanelMain_Aposta, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 890, 680));
+
+        jPanelMain_MinhasApostas.setBackground(new java.awt.Color(36, 47, 65));
+        jPanelMain_MinhasApostas.setPreferredSize(new java.awt.Dimension(840, 617));
+
+        jTableMinhasApostas.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jTableMinhasApostas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Identificador da Aposta", "Ganho Possivel"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTableMinhasApostas);
+
+        javax.swing.GroupLayout jPanelMain_MinhasApostasLayout = new javax.swing.GroupLayout(jPanelMain_MinhasApostas);
+        jPanelMain_MinhasApostas.setLayout(jPanelMain_MinhasApostasLayout);
+        jPanelMain_MinhasApostasLayout.setHorizontalGroup(
+            jPanelMain_MinhasApostasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMain_MinhasApostasLayout.createSequentialGroup()
+                .addGap(187, 187, 187)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(199, Short.MAX_VALUE))
+        );
+        jPanelMain_MinhasApostasLayout.setVerticalGroup(
+            jPanelMain_MinhasApostasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelMain_MinhasApostasLayout.createSequentialGroup()
+                .addGap(126, 126, 126)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(209, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanelMain_MinhasApostas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 890, 680));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -483,60 +657,86 @@ public class MenuApostador extends javax.swing.JFrame {
     private void jPanelHomeMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelHomeMouseClicked
         jPanelHome.setBackground(new Color(221, 85, 85));
         indHome.setOpaque(true);
-        resetColor(new JPanel[] { jPanelProfile }, 
-                   new JPanel[] { indProfile });
+        resetColor(new JPanel[] { jPanelProfile, jPanelAposta, jPanelMinhasApostas }, 
+                   new JPanel[] { indProfile, indAposta, indMinhasApostas });
         
         jPanelMain_Profile.setVisible(false);
         jPanelMain_Home.setVisible(true);
+        jPanelMain_Aposta.setVisible(false);
+        jPanelMain_MinhasApostas.setVisible(false);
     }//GEN-LAST:event_jPanelHomeMouseClicked
 
     private void jPanelProfileMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelProfileMouseClicked
         jPanelProfile.setBackground(new Color(221, 85, 85));
         indProfile.setOpaque(true);
-        resetColor(new JPanel[] { jPanelHome }, 
-                   new JPanel[] { indHome });
+        resetColor(new JPanel[] { jPanelHome, jPanelAposta, jPanelMinhasApostas }, 
+                   new JPanel[] { indHome, indAposta, indMinhasApostas });
         
         jPanelMain_Home.setVisible(false);
         jPanelMain_Profile.setVisible(true);
+        jPanelMain_Aposta.setVisible(false);
+        jPanelMain_MinhasApostas.setVisible(false);
     }//GEN-LAST:event_jPanelProfileMouseClicked
-
-    private void jPanelAddEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelAddEventoMouseClicked
-        DefaultTableModel model = (DefaultTableModel) jTableEventos.getModel();
-        int index = jTableEventos.getSelectedRow();
-        
-        int idEvento = (int) model.getValueAt(index, 0);
-        String equipaUm = model.getValueAt(index, 1).toString();
-        String equipaDois = model.getValueAt(index, 2).toString();
-        double oddUm = (double) model.getValueAt(index, 3);
-        double oddDois = (double) model.getValueAt(index, 4);
-        double oddX = (double) model.getValueAt(index, 5);
-        
-        Evento e = new Evento(idEvento, equipaUm, equipaDois, oddUm, oddDois,
-                              oddX, "ACTIVO", "NULL");
-        
-        this.newAposta.addEventoToAposta(e);
-    }//GEN-LAST:event_jPanelAddEventoMouseClicked
-
-    private void jPanelRemEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelRemEventoMouseClicked
-        DefaultTableModel model = (DefaultTableModel) jTableEventos.getModel();
-        int index = jTableEventos.getSelectedRow();
-        
-        int idEvento = (int) model.getValueAt(index, 0);
-        String equipaUm = model.getValueAt(index, 1).toString();
-        String equipaDois = model.getValueAt(index, 2).toString();
-        double oddUm = (double) model.getValueAt(index, 3);
-        double oddDois = (double) model.getValueAt(index, 4);
-        double oddX = (double) model.getValueAt(index, 5);
-        
-        Evento e = new Evento(idEvento, equipaUm, equipaDois, oddUm, oddDois,
-                              oddX, "ACTIVO", "NULL");
-        
-        this.newAposta.remEventoFromAposta(e);
-    }//GEN-LAST:event_jPanelRemEventoMouseClicked
 
     private void jPanelApostarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelApostarMouseClicked
         // TODO add your handling code here:
+        this.betEss.novaAposta(this.user, newAposta);
+        this.newAposta = new Aposta();
+        
+        jPanelMinhasApostas.setBackground(new Color(221, 85, 85));
+        indMinhasApostas.setOpaque(true);
+        resetColor(new JPanel[] { jPanelHome, jPanelProfile, jPanelAposta }, 
+                   new JPanel[] { indHome, indProfile, indAposta });
+        
+        addAllApostasTable(this.betEss.getApostas(this.user));
+        
+        jPanelMain_Home.setVisible(false);
+        jPanelMain_Profile.setVisible(false);
+        jPanelMain_Aposta.setVisible(false);
+        jPanelMain_MinhasApostas.setVisible(true);
+        
     }//GEN-LAST:event_jPanelApostarMouseClicked
+
+    private void jPanelApostaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelApostaMouseClicked
+        // TODO add your handling code here:
+        jPanelAposta.setBackground(new Color(221, 85, 85));
+        indAposta.setOpaque(true);
+        resetColor(new JPanel[] { jPanelHome, jPanelProfile, jPanelMinhasApostas }, 
+                   new JPanel[] { indHome, indProfile, indMinhasApostas });
+        
+        setUpApostaAtual();
+        
+        jPanelMain_Home.setVisible(false);
+        jPanelMain_Profile.setVisible(false);
+        jPanelMain_Aposta.setVisible(true);
+        jPanelMain_MinhasApostas.setVisible(false);
+    }//GEN-LAST:event_jPanelApostaMouseClicked
+
+    private void jPanelConsultarEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelConsultarEventoMouseClicked
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) jTableEventos.getModel();
+        int index = jTableEventos.getSelectedRow();
+        int idEvento = (int) model.getValueAt(index, 0);
+        
+        EventoDialog ed = new EventoDialog(this, true, this.betEss, idEvento, this.newAposta);
+        ed.setVisible(true);
+        
+    }//GEN-LAST:event_jPanelConsultarEventoMouseClicked
+
+    private void jPanelMinhasApostasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelMinhasApostasMouseClicked
+        // TODO add your handling code here:
+        jPanelMinhasApostas.setBackground(new Color(221, 85, 85));
+        indMinhasApostas.setOpaque(true);
+        resetColor(new JPanel[] { jPanelHome, jPanelProfile, jPanelAposta }, 
+                   new JPanel[] { indHome, indProfile, indAposta });
+        
+        addAllApostasTable(this.betEss.getApostas(this.user));
+        
+        jPanelMain_Home.setVisible(false);
+        jPanelMain_Profile.setVisible(false);
+        jPanelMain_Aposta.setVisible(false);
+        jPanelMain_MinhasApostas.setVisible(true);
+    }//GEN-LAST:event_jPanelMinhasApostasMouseClicked
     
     
     /* ******************************* *
@@ -559,6 +759,9 @@ public class MenuApostador extends javax.swing.JFrame {
         // Adiciona todos os eventos existentes à JList.
         addAllEventosTable(this.betEss.getEventos().values());
         
+        //Adiciona as apostas à tabela das minhas apostas.
+        addAllApostasTable(this.betEss.getApostas(this.user));
+        
         // Botão de home selecionada como predefinido.
         jPanelHome.setBackground(new Color(221, 85, 85));
         indHome.setOpaque(true);
@@ -567,6 +770,33 @@ public class MenuApostador extends javax.swing.JFrame {
         
         // Menu de Profile não visível.
         jPanelMain_Profile.setVisible(false);
+        
+        //Menu de Aposta não visível.
+        jPanelMain_Aposta.setVisible(false);
+        
+        //Menu de Minhas Apostas não visível.
+        jPanelMain_MinhasApostas.setVisible(false);
+    }
+    
+    private void setUpApostaAtual() {
+        DefaultTableModel model = new DefaultTableModel();
+        
+        model.addColumn("Equipa Casa");
+        model.addColumn("Equipa Fora");
+        model.addColumn("Odd Apostada");
+        //DefaultTableModel model = (DefaultTableModel) jTableAposta.getModel();
+        this.newAposta.getEventos().values().forEach((e) -> {
+            model.addRow(new Object[] {
+                e.getEquipaUm(),
+                e.getEquipaDois(),
+                this.newAposta.getOdds().get(e.getIdEvento())
+            });
+        });
+        
+        jTableAposta.setModel(model);
+        
+        ganhos.setText(String.valueOf(this.newAposta.getValor()));
+        
     }
     
     private void resetColor(JPanel[] panels, JPanel[] indicators) {
@@ -598,11 +828,31 @@ public class MenuApostador extends javax.swing.JFrame {
         });
     }
     
+    public void addAllApostasTable(Collection<Aposta> apostas){
+        DefaultTableModel model = new DefaultTableModel();
+        model.addColumn("Identificador");
+        model.addColumn("Ganho possível");
+        
+        apostas.forEach((a) -> {
+            model.addRow(new Object[] {
+                a.getIdAposta(),
+                a.getValor()
+            });
+        });
+        
+        jTableMinhasApostas.setModel(model);
+        
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel ganhos;
+    private javax.swing.JPanel indAposta;
     private javax.swing.JPanel indHome;
+    private javax.swing.JPanel indMinhasApostas;
     private javax.swing.JPanel indProfile;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -610,23 +860,31 @@ public class MenuApostador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
+    private javax.swing.JLabel jLabelAposta;
     private javax.swing.JLabel jLabelHome_Coins;
     private javax.swing.JLabel jLabelHome_Nome;
     private javax.swing.JLabel jLabelProfile;
+    private javax.swing.JLabel jLabelProfile1;
     private javax.swing.JLabel jLabel_BetESS_Logo;
-    private javax.swing.JPanel jPanelAddEvento;
+    private javax.swing.JPanel jPanelAposta;
     private javax.swing.JPanel jPanelApostar;
+    private javax.swing.JPanel jPanelConsultarEvento;
     private javax.swing.JPanel jPanelHome;
+    private javax.swing.JPanel jPanelMain_Aposta;
     private javax.swing.JPanel jPanelMain_Home;
+    private javax.swing.JPanel jPanelMain_MinhasApostas;
     private javax.swing.JPanel jPanelMain_Profile;
     private javax.swing.JPanel jPanelMenu;
+    private javax.swing.JPanel jPanelMinhasApostas;
     private javax.swing.JPanel jPanelProfile;
-    private javax.swing.JPanel jPanelRemEvento;
     private javax.swing.JPanel jPanel_BtnLogout;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTableAposta;
     private javax.swing.JTable jTableEventos;
+    private javax.swing.JTable jTableMinhasApostas;
     private javax.swing.JTextField jTextHome_Coins;
     private javax.swing.JTextField jTextHome_Eventos;
     private javax.swing.JTextField jTextHome_Nome;
@@ -635,4 +893,5 @@ public class MenuApostador extends javax.swing.JFrame {
     private javax.swing.JTextField jTextProfile_Nome;
     private javax.swing.JTextField jTextProfile_Password;
     // End of variables declaration//GEN-END:variables
+
 }
