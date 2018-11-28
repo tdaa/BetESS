@@ -6,6 +6,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.Reader;
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
@@ -183,6 +184,17 @@ public class BetESS implements Serializable {
         this.apostadores.get(userEmail).addAposta(aposta);
     }
     
+    /**
+     * Busca pela coleção de apostas de um determinado apostador.
+     * 
+     * @param userEmail
+     * @return
+     */
+    public Collection<Aposta> getApostas(String userEmail){
+        if(this.apostadores.containsKey(user))
+            return this.apostadores.get(user).getApostas().values();
+        return null;
+    }
     
     /* ********************************************* *
      * Conjunto de métodos chamados pelo MenuAdmin.  *
