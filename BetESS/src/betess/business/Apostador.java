@@ -55,7 +55,7 @@ public class Apostador extends Utilizador {
     }
 
     public Map<Integer, Aposta> getApostas() {
-        Map<Integer,Aposta> aps = new HashMap<>();
+        Map<Integer, Aposta> aps = new HashMap<>();
         
         this.apostas.entrySet().forEach(m -> {
             aps.put(m.getKey(), m.getValue());
@@ -69,10 +69,31 @@ public class Apostador extends Utilizador {
             this.apostas.put(m.getKey(), m.getValue());
         });
     }
+    
+    /**
+     * Método addTotalCoins(...).
+     * Adiciona ao total de coins o valor em parâmetro..
+     * 
+     * @param coins - número de coins a serem adicionadas.
+     */
+    public void addTotalCoins(double coins) {
+        this.essCoins += coins;
+    }
+    
+    /**
+     * Método substractTotalCoins(...).
+     * Substraí ao total de coins o valor em parâmetro.
+     * 
+     * @param coins - número de coins a serem subtraídas.
+     */
+    public void subtractTotalCoins(double coins) {
+        this.essCoins -= coins;
+    }
 
     /**
      * Método toString().
      * Retorna uma representação textual do objeto.
+     * 
      * @return 
      */
     @Override
@@ -82,21 +103,23 @@ public class Apostador extends Utilizador {
     }
     
     /**
+     * Método getIdNovaAposta().
+     * Retorna o novo ID de uma determinada aposta.
      * 
-     * @return Identificador para uma nova aposta,
+     * @return Identificador para uma nova aposta.
      */
     public int getIdNovaAposta() {
         return this.apostas.size() + 1;
     }
     
-    /* Adiciona uma nova aposta à sua lista */
-
     /**
-     *
-     * @param aposta
+     * Método addAposta().
+     * Adiciona uma nova aposta ao total de apostas.
+     * 
+     * @param aposta - nova Aposta a ser adicionada.
      */
     public void addAposta(Aposta aposta) {
-        aposta.setIdAposta(this.apostas.size()+1);
+        aposta.setIdAposta(this.apostas.size() + 1);
         this.apostas.put(aposta.getIdAposta(), aposta);
     }
 }

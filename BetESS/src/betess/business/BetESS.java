@@ -28,6 +28,9 @@ public class BetESS implements Serializable {
     private Map<String, LinkedList<Aposta>> apostas;
     private DataBetESS bd;
 
+    /**
+     * Construtor Vazio - BetESS.
+     */
     public BetESS() {
         this.user = "";
         this.apostadores = new HashMap<>();
@@ -117,20 +120,24 @@ public class BetESS implements Serializable {
         return e;
     }
     
-    public Apostador getApostador(String email){
-        if(this.apostadores.containsKey(email))
-            return this.apostadores.get(email);
-        else return null;
+    public Apostador getApostador(String email) {
+        Apostador a = null;
+        
+        if (this.apostadores.containsKey(email))
+            a = this.apostadores.get(email);
+        
+        return a;
     }
     
     /**
-     * 
+     * Método registo(...).
+     * Efetuar, se possível, o registo de um novo utilizador na aplicação.
      * 
      * @param email
      * @param nome
      * @param pass
      * @param coins
-     * @throws betess.business.RegistoInvalidoException 
+     * @throws RegistoInvalidoException 
      */
     public void registo(String email, String nome, String pass, double coins) 
            throws RegistoInvalidoException
@@ -138,10 +145,13 @@ public class BetESS implements Serializable {
         if (!this.apostadores.containsKey(email)) {
             Apostador a = new Apostador(email, nome, pass, coins);
             this.apostadores.put(email, a);
-        } else throw new RegistoInvalidoException("Utilizador já registado!");
+        } else 
+            throw new RegistoInvalidoException("Utilizador já registado!");
     }
     
     /**
+     * Método login(...).
+     * Verifica os dados de entrada de um determinado utilizador.
      * 
      * @param email
      * @param pass
@@ -175,25 +185,38 @@ public class BetESS implements Serializable {
     }
     
     /**
+     * Método novaAposta(...).
      * Adiciona uma aposta a uma lista de apostas de um determinado apostador.
      * 
      * @param userEmail
+     * @param essCoins
      * @param aposta
      */
-    public void novaAposta(String userEmail, Aposta aposta){
+    public void novaAposta(String userEmail, double essCoins, Aposta aposta) {
+        // Adiciona valor da aposta.
+        aposta.setValor(essCoins);
+        
+        // Substraí número de coins apostadas ao total do User.
+        this.getApostador(userEmail).subtractTotalCoins(essCoins);
+        
+        // Adiciona a nova aposta à respetiva estrutura de dados.
         this.apostadores.get(userEmail).addAposta(aposta);
     }
     
     /**
+     * Método getApostasUser(...).
      * Busca pela coleção de apostas de um determinado apostador.
      * 
      * @param userEmail
      * @return
      */
-    public Collection<Aposta> getApostas(String userEmail){
-        if(this.apostadores.containsKey(user))
-            return this.apostadores.get(user).getApostas().values();
-        return null;
+    public Collection<Aposta> getApostasUser(String userEmail) {
+        Collection<Aposta> c = null;
+        
+        if (this.apostadores.containsKey(userEmail))
+            c = this.apostadores.get(userEmail).getApostas().values();
+        
+        return c;
     }
     
     /* ********************************************* *
@@ -201,7 +224,8 @@ public class BetESS implements Serializable {
      * ********************************************* */
 
     /**
-     * Cria um novo evento, e adiciona-o a respetiva estrutura de dados.
+     * Método novoEvento(...).
+     * Cria um novo evento, e adiciona-o à respetiva estrutura de dados.
      * 
      * @param equipaUm
      * @param equipaDois
@@ -209,24 +233,27 @@ public class BetESS implements Serializable {
      * @param oddX
      * @param oddDois
      */  
-    public void novoEvento(String equipaUm, String equipaDois, double oddUm, 
-                           double oddX, double oddDois)
+    public void novoEvento(String equipaUm, String equipaDois, 
+                           double oddUm, double oddX, double oddDois)
     {
-        Evento evento = new Evento(this.eventos.size()+1, equipaUm, equipaDois, oddUm, oddDois, oddX, "aberto", "-");
+        Evento evento = new Evento(this.eventos.size() + 1, equipaUm, equipaDois,
+                                   oddUm, oddDois, oddX, "ABERTO", "-");
         this.eventos.put(evento.getIdEvento(), evento);
     }
     
     /**
-     * Altera o estado de um evento de aberto para fechado.
+     * Método alteraEstadoEvento(...).
+     * Altera o estado de um evento de ABERTO para FECHADO.
      * 
      * @param idEvento
      */
     public void alteraEstadoEvento(int idEvento) {
         if (this.eventos.containsKey(idEvento))
-            this.eventos.get(idEvento).setEstado("fechado");
+            this.eventos.get(idEvento).setEstado("FECHADO");
     }
     
     /**
+     * Método novoResultado(...)
      * Atualiza o resultado de um evento.
      * 
      * @param idEvento
@@ -238,16 +265,17 @@ public class BetESS implements Serializable {
     }
     
     /**
-     * Remove um determinado evento da lnista de eventos.
+     * Método removeEvento(...).
+     * Remove um determinado evento da lista de eventos.
      * 
      * @param idEvento
      */
-    public void removeEvento(int idEvento){
-        if(this.eventos.containsKey(idEvento))
-            this.eventos.remove(idEvento);
+    public void removeEvento(int idEvento) {
+        this.eventos.remove(idEvento);
     }
     
     /**
+     * Método carregaEventos().
      * Importa eventos vindos de um ficheiro JSON.
      */
     public void carregaEventos() {
@@ -268,21 +296,24 @@ public class BetESS implements Serializable {
             double oddX = item.get("oddX").getAsDouble();
             double oddDois = item.get("oddDois").getAsDouble();
             
-            Evento e = new Evento(idEvento, equipaUm, equipaDois, oddUm, oddDois, oddX, "aberto", "-");
+            Evento e = new Evento(idEvento, equipaUm, equipaDois, oddUm, oddDois, oddX, "ABERTO", "-");
             this.eventos.put(idEvento, e);
         }
     }
     
     /**
-     *
-     * @return Objeto com estado guardado anteriormente.
+     * Método startApp().
+     * Recupera o estado anterior da aplicação.
+     * 
+     * @return Objeto 'BetESS' - Estado guardado anteriormente.
      */
     public BetESS startApp() {
         return this.bd.readData("betdata.obj", this);
     }
     
     /**
-     * Guarda o estado de todo o sistema num ficheiro "betdata".
+     * Método endApp().
+     * Guarda o estado de todo o sistema num ficheiro "betdata.obj".
      */
     public void endApp() {
         this.bd.writeData("betdata.obj", this);
