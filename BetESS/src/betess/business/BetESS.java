@@ -201,6 +201,15 @@ public class BetESS implements Serializable {
         
         // Adiciona a nova aposta à respetiva estrutura de dados.
         this.apostadores.get(userEmail).addAposta(aposta);
+        
+        if(this.apostas.containsKey(userEmail)){
+            this.apostas.get(userEmail).add(aposta);
+        }
+        else{
+            LinkedList<Aposta> lista = new LinkedList<>();
+            lista.add(aposta);
+            this.apostas.put(userEmail, lista);
+        }
     }
     
     /**
@@ -248,8 +257,26 @@ public class BetESS implements Serializable {
      * @param idEvento
      */
     public void alteraEstadoEvento(int idEvento) {
-        if (this.eventos.containsKey(idEvento))
+        if (this.eventos.containsKey(idEvento)){
             this.eventos.get(idEvento).setEstado("FECHADO");
+            
+            for(String user: this.apostas.keySet()){
+                LinkedList<Aposta> lista = this.apostas.get(user);
+                for(Aposta a: lista){
+                    for(Evento e: a.getEventos().values()){
+                        
+                        if(e.getIdEvento() == idEvento){
+                            //atualiza estado no map apostador-aposta
+                            e.setEstado("FECHADO");
+                            
+                            //atualiza estado nas apostas do apostador
+                            this.apostadores.get(user).getApostas().get(a.getIdAposta()).getEventos().get(idEvento).setEstado("FECHADO");
+                        }
+                    }
+                }
+            }
+            
+        }        
     }
     
     /**
