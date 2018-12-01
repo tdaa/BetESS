@@ -33,9 +33,12 @@ public class Aposta implements Serializable {
         this.idAposta = a.getIdAposta();
         this.valor = a.getValor();
         this.eventos = a.getEventos();
+        this.oddsApostadas = a.getOdds();
     }
     
-    public Aposta(int idAposta, Map<Integer, Evento> eventos, Map<Integer, Double> odds, double valor) {
+    public Aposta(int idAposta, Map<Integer, Evento> eventos, 
+                  Map<Integer, Double> odds, double valor) 
+    {
         this.idAposta = idAposta;
         this.setEventos(eventos);
         this.setOdds(odds);
@@ -88,16 +91,37 @@ public class Aposta implements Serializable {
     }
 
     public double getValor() {
-        return valor;
+        return this.valor;
     }
 
     public void setValor(double valor) {
         this.valor = valor;
     }
+    
+    public double getTotalOdds() {
+        /*
+        //BUG!!!! odssApostadas está a NULL!!!!
+        double total = 0;
+        
+        if (this.oddsApostadas == null)
+            total = 2;
+        
+        return total; */
+        
+        return this.oddsApostadas.values()
+                .stream()
+                .mapToDouble(d -> d)
+                .sum();
+    }
+    
+    public double getGanhoTotal() {
+        return (this.valor * this.getTotalOdds());
+    }
 
     /**
      * Método toString().
      * Retorna uma representação textual do objeto.
+     * 
      * @return 
      */
     @Override
@@ -106,19 +130,40 @@ public class Aposta implements Serializable {
                ", eventos=" + this.eventos + ", valor=" + this.valor + '}';
     }
     
-    // Adicionar evento a aposta
+    /**
+     * Método clone().
+     * Retorna uma cópia do objeto.
+     * 
+     * @return 
+     */
+    public Aposta clone() {
+        return new Aposta(this);
+    }
+    
+    /**
+     * Método addEventoToAposta(...).
+     * Adiciona evento a uma aposta.
+     * 
+     * @param e
+     * @param odd 
+     */
     public void addEventoToAposta(Evento e, double odd) {
-        if (!this.eventos.containsKey(e.getIdEvento())){
+        if (!this.eventos.containsKey(e.getIdEvento())) {
             this.eventos.put(e.getIdEvento(), e);
             this.oddsApostadas.put(e.getIdEvento(), odd);
-            this.valor += odd;
+            //this.valor += odd;
         }
     }
     
-    // Adicionar evento a aposta
+    /**
+     * Método remEventoFromAposta(...).
+     * Remove evento de uma aposta.
+     * 
+     * @param e 
+     */
     public void remEventoFromAposta(Evento e) {
         this.eventos.remove(e.getIdEvento(), e);
-        this.valor -= this.oddsApostadas.get(e.getIdEvento());
+        //this.valor -= this.oddsApostadas.get(e.getIdEvento());
         this.oddsApostadas.remove(e.getIdEvento(), e);
     }
 }

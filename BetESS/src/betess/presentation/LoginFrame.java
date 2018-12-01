@@ -299,7 +299,7 @@ public class LoginFrame extends javax.swing.JFrame {
         String password = String.valueOf(arrayPass);
         
         try {
-            this.betEss.registo(email, nome, password, 1000);
+            this.betEss.registo(email, nome, password, 0);
             javax.swing.JOptionPane.showMessageDialog(this, "Registo efetuado com sucesso!", "Registo", 1); // Futuramente mudar icon!
         } catch (RegistoInvalidoException e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Dados inválidos!", "Registo", 0);

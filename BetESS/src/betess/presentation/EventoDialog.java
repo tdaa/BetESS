@@ -1,20 +1,15 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package betess.presentation;
 
 import betess.business.Aposta;
 import betess.business.BetESS;
 import betess.business.Evento;
-import java.awt.Color;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
 
 /**
- *
- * @author tiagoalves
+ * 
+ * @author Manuel Sousa 
+ * @author Tiago Alves
  */
 public class EventoDialog extends javax.swing.JDialog {
     
@@ -23,22 +18,26 @@ public class EventoDialog extends javax.swing.JDialog {
     private Aposta aposta;
     
     /**
-     * Creates new form EventoDialog
+     * Creates new form EventoDialog.
      * @param parent
      * @param modal
      * @param b
      * @param idEvento
+     * @param a
      */
     public EventoDialog(java.awt.Frame parent, boolean modal, BetESS b, int idEvento, Aposta a) {
         super(parent, modal);
         this.betEss = b;
         this.aposta = a;
         this.evento = this.betEss.getEvento(idEvento);
-        setUp();
+        
+        setup();
         initComponents();
+        
+        this.setLocationRelativeTo(null);
     }
     
-    private void setUp(){
+    private void setup() {
         this.jLabelEquipaUm = new JLabel(this.evento.getEquipaUm());
         this.jLabelEquipaDois = new JLabel(this.evento.getEquipaDois());
         this.oddUm = new JCheckBox();
@@ -68,8 +67,6 @@ public class EventoDialog extends javax.swing.JDialog {
         oddDois = new javax.swing.JCheckBox();
         jPanelAddEvento = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
-        jPanelRemEvento = new javax.swing.JPanel();
-        jLabel15 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -122,37 +119,9 @@ public class EventoDialog extends javax.swing.JDialog {
         );
         jPanelAddEventoLayout.setVerticalGroup(
             jPanelAddEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddEventoLayout.createSequentialGroup()
-                .addContainerGap(20, Short.MAX_VALUE)
-                .addComponent(jLabel14)
-                .addGap(17, 17, 17))
-        );
-
-        jPanelRemEvento.setBackground(new java.awt.Color(255, 102, 102));
-        jPanelRemEvento.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelRemEventoMouseClicked(evt);
-            }
-        });
-
-        jLabel15.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel15.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel15.setText("Remover Evento");
-
-        javax.swing.GroupLayout jPanelRemEventoLayout = new javax.swing.GroupLayout(jPanelRemEvento);
-        jPanelRemEvento.setLayout(jPanelRemEventoLayout);
-        jPanelRemEventoLayout.setHorizontalGroup(
-            jPanelRemEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRemEventoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel15)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelRemEventoLayout.setVerticalGroup(
-            jPanelRemEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelRemEventoLayout.createSequentialGroup()
+            .addGroup(jPanelAddEventoLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(jLabel15)
+                .addComponent(jLabel14)
                 .addContainerGap(20, Short.MAX_VALUE))
         );
 
@@ -179,10 +148,8 @@ public class EventoDialog extends javax.swing.JDialog {
                                 .addGap(18, 18, 18)
                                 .addComponent(oddDois))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addComponent(jPanelAddEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(90, 90, 90)
-                        .addComponent(jPanelRemEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(151, 151, 151)
+                        .addComponent(jPanelAddEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(93, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -198,11 +165,9 @@ public class EventoDialog extends javax.swing.JDialog {
                     .addComponent(oddUm)
                     .addComponent(oddX)
                     .addComponent(oddDois))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanelAddEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jPanelRemEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
+                .addComponent(jPanelAddEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31))
         );
 
         javax.swing.GroupLayout jPanelEventoLayout = new javax.swing.GroupLayout(jPanelEvento);
@@ -219,7 +184,7 @@ public class EventoDialog extends javax.swing.JDialog {
             .addGroup(jPanelEventoLayout.createSequentialGroup()
                 .addGap(60, 60, 60)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(49, Short.MAX_VALUE))
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -230,51 +195,36 @@ public class EventoDialog extends javax.swing.JDialog {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanelEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addComponent(jPanelEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jPanelAddEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelAddEventoMouseClicked
-        // TODO add your handling code here:
-        if(this.oddUm.isSelected() && !this.oddDois.isSelected() && !this.oddX.isSelected()){
+        if (this.oddUm.isSelected() && !this.oddDois.isSelected() && !this.oddX.isSelected()) {
             double odd = Double.valueOf(this.oddUm.getText());
-            this.aposta.addEventoToAposta(evento, odd);
+            this.aposta.addEventoToAposta(this.evento, odd);
             this.dispose();
-        }
-
-        else if(!this.oddUm.isSelected() && this.oddDois.isSelected() && !this.oddX.isSelected()){
+        } else if (!this.oddUm.isSelected() && this.oddDois.isSelected() && !this.oddX.isSelected()) {
             double odd = Double.valueOf(this.oddDois.getText());
-            this.aposta.addEventoToAposta(evento, odd);
+            this.aposta.addEventoToAposta(this.evento, odd);
             this.dispose();
-        }
-
-        else if(!this.oddUm.isSelected() && !this.oddDois.isSelected() && this.oddX.isSelected()){
+        } else if (!this.oddUm.isSelected() && !this.oddDois.isSelected() && this.oddX.isSelected()) {
             double odd = Double.valueOf(this.oddX.getText());
-            this.aposta.addEventoToAposta(evento, odd);
+            this.aposta.addEventoToAposta(this.evento, odd);
             this.dispose();
         }
     }//GEN-LAST:event_jPanelAddEventoMouseClicked
 
-    private void jPanelRemEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelRemEventoMouseClicked
-        // TODO add your handling code here:
-        this.aposta.remEventoFromAposta(evento);
-        this.dispose();
-    }//GEN-LAST:event_jPanelRemEventoMouseClicked
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelEquipaDois;
     private javax.swing.JLabel jLabelEquipaUm;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanelAddEvento;
     private javax.swing.JPanel jPanelEvento;
-    private javax.swing.JPanel jPanelRemEvento;
     private javax.swing.JCheckBox oddDois;
     private javax.swing.JCheckBox oddUm;
     private javax.swing.JCheckBox oddX;
