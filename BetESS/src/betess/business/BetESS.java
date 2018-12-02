@@ -202,12 +202,11 @@ public class BetESS implements Serializable {
         // Adiciona a nova aposta à respetiva estrutura de dados.
         this.apostadores.get(userEmail).addAposta(aposta);
         
-        if(this.apostas.containsKey(userEmail)){
+        if (this.apostas.containsKey(userEmail)) {
             this.apostas.get(userEmail).add(aposta);
-        }
-        else{
+        } else {
             LinkedList<Aposta> lista = new LinkedList<>();
-            lista.add(aposta);
+            lista.addFirst(aposta); // Adiciona aposta à cabeça de lista.
             this.apostas.put(userEmail, lista);
         }
     }
@@ -253,6 +252,7 @@ public class BetESS implements Serializable {
     /**
      * Método alteraEstadoEvento(...).
      * Altera o estado de um evento de ABERTO para FECHADO.
+     * DÚVIDA! Os Eventos não tem endereço partilhado?? Não basta mudar o estado em apenas um, que muda em todos?
      * 
      * @param idEvento
      */
@@ -260,17 +260,21 @@ public class BetESS implements Serializable {
         if (this.eventos.containsKey(idEvento)){
             this.eventos.get(idEvento).setEstado("FECHADO");
             
-            for(String user: this.apostas.keySet()){
-                LinkedList<Aposta> lista = this.apostas.get(user);
-                for(Aposta a: lista){
-                    for(Evento e: a.getEventos().values()){
-                        
-                        if(e.getIdEvento() == idEvento){
-                            //atualiza estado no map apostador-aposta
+            for (String apostador: this.apostas.keySet()) {
+                LinkedList<Aposta> lista = this.apostas.get(apostador);
+                for (Aposta a: lista) {
+                    for (Evento e: a.getEventos().values()) {      
+                        if (e.getIdEvento() == idEvento) {
+                            // Atualiza estado no Map apostador-aposta.
                             e.setEstado("FECHADO");
                             
-                            //atualiza estado nas apostas do apostador
-                            this.apostadores.get(user).getApostas().get(a.getIdAposta()).getEventos().get(idEvento).setEstado("FECHADO");
+                            // Atualiza estado nas apostas do apostador.
+                            this.apostadores.get(apostador)
+                                    .getApostas()
+                                    .get(a.getIdAposta())
+                                    .getEventos()
+                                    .get(idEvento)
+                                    .setEstado("FECHADO");
                         }
                     }
                 }
