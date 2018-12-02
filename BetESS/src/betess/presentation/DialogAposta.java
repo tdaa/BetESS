@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package betess.presentation;
 
 import betess.business.Aposta;
@@ -11,7 +6,8 @@ import javax.swing.table.DefaultTableModel;
 
 /**
  *
- * @author tiagoalves
+ * @author Manuel Sousa
+ * @author Tiago Alves
  */
 public class DialogAposta extends javax.swing.JDialog {
     
@@ -20,16 +16,23 @@ public class DialogAposta extends javax.swing.JDialog {
 
     /**
      * Creates new form DialogAposta
+     * @param parent
+     * @param modal
+     * @param b
+     * @param a
      */
     public DialogAposta(java.awt.Frame parent, boolean modal, BetESS b, Aposta a) {
         super(parent, modal);
         this.betEss = b;
         this.aposta = a;
+        
         initComponents();
-        setUp();
+        setup();
+        
+        this.setLocationRelativeTo(null);
     }
     
-    private void setUp(){
+    private void setup() {
         DefaultTableModel model = (DefaultTableModel) this.jTableAposta.getModel();
         
         this.aposta.getEventos().values().forEach(e -> {
@@ -72,6 +75,7 @@ public class DialogAposta extends javax.swing.JDialog {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setBackground(new java.awt.Color(36, 47, 65));
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(36, 47, 65));
 

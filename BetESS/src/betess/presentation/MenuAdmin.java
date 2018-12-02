@@ -225,9 +225,9 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_addButtonActionPerformed
 
     private void removeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_removeButtonActionPerformed
-        // Botao remover
+        // Botão remover.
         String s = this.listaEventos.getSelectedValue();
-        if(s!=null){
+        if(s != null){
             int id = Integer.parseInt(s.substring(0, s.indexOf(" - ")));
             this.betEss.removeEvento(id);
             this.atualizaLista();
@@ -240,7 +240,7 @@ public class MenuAdmin extends javax.swing.JFrame {
     }//GEN-LAST:event_importButtonActionPerformed
 
     private void apostadoresButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_apostadoresButtonActionPerformed
-        // botao consultar apostadores
+        // Botão consultar apostadores.
         FrameApostadores fa = new FrameApostadores(this.betEss);
         fa.setVisible(true);
     }//GEN-LAST:event_apostadoresButtonActionPerformed

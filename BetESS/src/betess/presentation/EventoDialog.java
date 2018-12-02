@@ -87,6 +87,7 @@ public class EventoDialog extends javax.swing.JDialog {
         editaResBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
 
         jPanelEvento.setBackground(new java.awt.Color(36, 47, 65));
         jPanelEvento.setMaximumSize(new java.awt.Dimension(30000, 30000));
@@ -207,7 +208,6 @@ public class EventoDialog extends javax.swing.JDialog {
         jPanel4.setBackground(new java.awt.Color(255, 102, 102));
 
         jLabel1.setFont(new java.awt.Font("Avenir", 0, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Estado");
 
         estado.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
@@ -218,7 +218,6 @@ public class EventoDialog extends javax.swing.JDialog {
         });
 
         jLabel3.setFont(new java.awt.Font("Avenir", 0, 18)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Resultado");
 
         resultado.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
