@@ -107,6 +107,8 @@ public class MenuApostador extends javax.swing.JFrame {
         jPanelMain_MinhasApostas = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jTableMinhasApostas = new javax.swing.JTable();
+        jPanelVerAposta = new javax.swing.JPanel();
+        jLabel14 = new javax.swing.JLabel();
 
         jDialogApostar.setResizable(false);
         jDialogApostar.setSize(new java.awt.Dimension(376, 172));
@@ -172,10 +174,11 @@ public class MenuApostador extends javax.swing.JFrame {
 
         jPanel2.setBackground(new java.awt.Color(36, 47, 65));
 
-        jLabel13.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Avenir", 1, 13)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setText("Número de Coins a Carregar");
 
+        BtnCarregarCoins.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
         BtnCarregarCoins.setText("Submeter Coins");
         BtnCarregarCoins.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -201,7 +204,7 @@ public class MenuApostador extends javax.swing.JFrame {
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(110, 110, 110)
                 .addComponent(BtnCarregarCoins)
-                .addGap(0, 110, Short.MAX_VALUE))
+                .addGap(0, 131, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -212,7 +215,7 @@ public class MenuApostador extends javax.swing.JFrame {
                 .addComponent(jComboBoxNCoins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(BtnCarregarCoins)
-                .addContainerGap(31, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jDialogCarregarCoinsLayout = new javax.swing.GroupLayout(jDialogCarregarCoins.getContentPane());
@@ -236,8 +239,6 @@ public class MenuApostador extends javax.swing.JFrame {
                 jPanel_BtnLogoutMouseClicked(evt);
             }
         });
-
-        jLabel7.setIcon(new javax.swing.ImageIcon("/Users/gcsousa/Desktop/Universidade/4º Ano/1º Semestre/Arquiteturas de Software - ESS/Trabalho Prático/Fase-1/Primeira-Versão/BetESS/BetESS/icons/icon-exit.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel_BtnLogoutLayout = new javax.swing.GroupLayout(jPanel_BtnLogout);
         jPanel_BtnLogout.setLayout(jPanel_BtnLogoutLayout);
@@ -667,7 +668,7 @@ public class MenuApostador extends javax.swing.JFrame {
                 .addGroup(jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextProfile_Coins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(408, Short.MAX_VALUE))
+                .addContainerGap(414, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelMain_Profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 890, 680));
@@ -803,6 +804,7 @@ public class MenuApostador extends javax.swing.JFrame {
         jPanelMain_MinhasApostas.setPreferredSize(new java.awt.Dimension(840, 617));
 
         jTableMinhasApostas.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jTableMinhasApostas.setForeground(new java.awt.Color(255, 102, 102));
         jTableMinhasApostas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -821,13 +823,45 @@ public class MenuApostador extends javax.swing.JFrame {
         });
         jScrollPane3.setViewportView(jTableMinhasApostas);
 
+        jPanelVerAposta.setBackground(new java.awt.Color(255, 102, 102));
+        jPanelVerAposta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelVerApostaMouseClicked(evt);
+            }
+        });
+
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Ver Aposta");
+
+        javax.swing.GroupLayout jPanelVerApostaLayout = new javax.swing.GroupLayout(jPanelVerAposta);
+        jPanelVerAposta.setLayout(jPanelVerApostaLayout);
+        jPanelVerApostaLayout.setHorizontalGroup(
+            jPanelVerApostaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelVerApostaLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addComponent(jLabel14)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+        jPanelVerApostaLayout.setVerticalGroup(
+            jPanelVerApostaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelVerApostaLayout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel14)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
         javax.swing.GroupLayout jPanelMain_MinhasApostasLayout = new javax.swing.GroupLayout(jPanelMain_MinhasApostas);
         jPanelMain_MinhasApostas.setLayout(jPanelMain_MinhasApostasLayout);
         jPanelMain_MinhasApostasLayout.setHorizontalGroup(
             jPanelMain_MinhasApostasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMain_MinhasApostasLayout.createSequentialGroup()
-                .addGap(192, 192, 192)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanelMain_MinhasApostasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelMain_MinhasApostasLayout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelMain_MinhasApostasLayout.createSequentialGroup()
+                        .addGap(364, 364, 364)
+                        .addComponent(jPanelVerAposta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(194, Short.MAX_VALUE))
         );
         jPanelMain_MinhasApostasLayout.setVerticalGroup(
@@ -835,7 +869,9 @@ public class MenuApostador extends javax.swing.JFrame {
             .addGroup(jPanelMain_MinhasApostasLayout.createSequentialGroup()
                 .addGap(128, 128, 128)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(jPanelVerAposta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(115, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelMain_MinhasApostas, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 890, 680));
@@ -994,6 +1030,19 @@ public class MenuApostador extends javax.swing.JFrame {
         // Atualizada as coins mostradas no menu Home.
         jTextHome_Coins.setText("" + this.betEss.getApostador(this.user).getEssCoins());
     }//GEN-LAST:event_BtnCarregarCoinsActionPerformed
+
+    private void jPanelVerApostaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelVerApostaMouseClicked
+        DefaultTableModel model = (DefaultTableModel) this.jTableMinhasApostas.getModel();
+        int index = jTableMinhasApostas.getSelectedRow();
+        int idAposta = (int) model.getValueAt(index, 0);
+        
+        Aposta a = this.betEss.getApostador(user).getApostas().get(idAposta);
+        
+        DialogAposta da = new DialogAposta(this, true, this.betEss, a);
+        da.setVisible(true);
+        da.setLocationRelativeTo(null);
+        
+    }//GEN-LAST:event_jPanelVerApostaMouseClicked
     
     
     /* ******************************* *
@@ -1038,6 +1087,7 @@ public class MenuApostador extends javax.swing.JFrame {
     private void setupApostaAtual() {
         DefaultTableModel model = new DefaultTableModel();
         
+        model.addColumn("ID");
         model.addColumn("Equipa Casa");
         model.addColumn("Equipa Fora");
         model.addColumn("Odd Apostada");
@@ -1118,6 +1168,7 @@ public class MenuApostador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
+    private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -1148,6 +1199,7 @@ public class MenuApostador extends javax.swing.JFrame {
     private javax.swing.JPanel jPanelMinhasApostas;
     private javax.swing.JPanel jPanelProfile;
     private javax.swing.JPanel jPanelRemEvento;
+    private javax.swing.JPanel jPanelVerAposta;
     private javax.swing.JPanel jPanel_BtnLogout;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;

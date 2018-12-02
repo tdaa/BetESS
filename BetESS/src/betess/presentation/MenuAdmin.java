@@ -140,6 +140,11 @@ public class MenuAdmin extends javax.swing.JFrame {
         });
 
         consultButton.setText("Consultar Evento");
+        consultButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                consultButtonActionPerformed(evt);
+            }
+        });
 
         importButton.setText("Carregar Dados");
         importButton.addActionListener(new java.awt.event.ActionListener() {
@@ -248,6 +253,16 @@ public class MenuAdmin extends javax.swing.JFrame {
         lf.setVisible(true);
         lf.setFocusableWindowState(true);
     }//GEN-LAST:event_LogoutButtonActionPerformed
+
+    private void consultButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_consultButtonActionPerformed
+        // TODO add your handling code here:
+        String s = this.listaEventos.getSelectedValue();
+        if (s != null){
+            int id = Integer.parseInt(s.substring(0, s.indexOf(" - ")));
+            EventoDialog ed = new EventoDialog(this, true, this.betEss, id, null);
+            ed.setVisible(true);
+        }
+    }//GEN-LAST:event_consultButtonActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton LogoutButton;

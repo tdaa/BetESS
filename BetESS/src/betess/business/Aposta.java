@@ -164,6 +164,6 @@ public class Aposta implements Serializable {
     public void remEventoFromAposta(Evento e) {
         this.eventos.remove(e.getIdEvento(), e);
         //this.valor -= this.oddsApostadas.get(e.getIdEvento());
-        this.oddsApostadas.remove(e.getIdEvento(), e);
+        this.oddsApostadas.remove(e.getIdEvento());
     }
 }

@@ -5,6 +5,7 @@ import betess.business.BetESS;
 import betess.business.Evento;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
+import javax.swing.JTextField;
 
 /**
  * 
@@ -31,21 +32,31 @@ public class EventoDialog extends javax.swing.JDialog {
         this.aposta = a;
         this.evento = this.betEss.getEvento(idEvento);
         
-        setup();
         initComponents();
+        setup();
         
         this.setLocationRelativeTo(null);
     }
     
     private void setup() {
-        this.jLabelEquipaUm = new JLabel(this.evento.getEquipaUm());
-        this.jLabelEquipaDois = new JLabel(this.evento.getEquipaDois());
-        this.oddUm = new JCheckBox();
-        this.oddDois = new JCheckBox();
-        this.oddX = new JCheckBox();
+        this.jLabelEquipaUm.setText(this.evento.getEquipaUm());
+        this.jLabelEquipaDois.setText(this.evento.getEquipaDois());
         this.oddUm.setText(String.valueOf(this.evento.getOddUm()));
         this.oddX.setText(String.valueOf(this.evento.getOddX()));
         this.oddDois.setText(String.valueOf(this.evento.getOddDois()));
+        this.estado.setText(this.evento.getEstado());
+        this.resultado.setText(this.evento.getResultado());
+        if(this.betEss.getUser().equals("betadmin@betess.pt")){
+            this.estado.setEditable(false);
+            this.resultado.setEditable(true);
+            this.jPanelAddEvento.setVisible(false);
+        }
+        else{
+            this.estado.setEditable(false);
+            this.resultado.setEditable(false);
+            this.editaEstadoBtn.setVisible(false);
+            this.editaResBtn.setVisible(false);
+        }
     }
 
     /**
@@ -67,6 +78,13 @@ public class EventoDialog extends javax.swing.JDialog {
         oddDois = new javax.swing.JCheckBox();
         jPanelAddEvento = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        estado = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        resultado = new javax.swing.JTextField();
+        editaEstadoBtn = new javax.swing.JButton();
+        editaResBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -75,82 +93,48 @@ public class EventoDialog extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(36, 47, 65));
 
-        jLabelEquipaUm.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabelEquipaUm.setFont(new java.awt.Font("Avenir", 0, 18)); // NOI18N
         jLabelEquipaUm.setForeground(new java.awt.Color(255, 255, 255));
         jLabelEquipaUm.setText(this.evento.getEquipaUm());
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("X");
 
-        jLabelEquipaDois.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
+        jLabelEquipaDois.setFont(new java.awt.Font("Avenir", 0, 18)); // NOI18N
         jLabelEquipaDois.setForeground(new java.awt.Color(255, 255, 255));
         jLabelEquipaDois.setText(this.evento.getEquipaDois());
 
+        oddUm.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
         oddUm.setForeground(new java.awt.Color(255, 255, 255));
-        oddUm.setText(String.valueOf(this.evento.getOddUm())
-        );
 
+        oddX.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
         oddX.setForeground(new java.awt.Color(255, 255, 255));
-        oddX.setText(String.valueOf(this.evento.getOddX()));
 
+        oddDois.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
         oddDois.setForeground(new java.awt.Color(255, 255, 255));
-        oddDois.setText(String.valueOf(this.evento.getOddDois())
-        );
-
-        jPanelAddEvento.setBackground(new java.awt.Color(255, 102, 102));
-        jPanelAddEvento.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jPanelAddEventoMouseClicked(evt);
-            }
-        });
-
-        jLabel14.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel14.setText("Adicionar Evento");
-
-        javax.swing.GroupLayout jPanelAddEventoLayout = new javax.swing.GroupLayout(jPanelAddEvento);
-        jPanelAddEvento.setLayout(jPanelAddEventoLayout);
-        jPanelAddEventoLayout.setHorizontalGroup(
-            jPanelAddEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAddEventoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel14)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jPanelAddEventoLayout.setVerticalGroup(
-            jPanelAddEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanelAddEventoLayout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addComponent(jLabel14)
-                .addContainerGap(20, Short.MAX_VALUE))
-        );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(22, 22, 22)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabelEquipaUm)
+                    .addComponent(oddUm))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(22, 22, 22)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabelEquipaUm)
-                            .addComponent(oddUm))
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(67, 67, 67)
-                                .addComponent(jLabel2)
-                                .addGap(68, 68, 68)
-                                .addComponent(jLabelEquipaDois))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(44, 44, 44)
-                                .addComponent(oddX)
-                                .addGap(18, 18, 18)
-                                .addComponent(oddDois))))
+                        .addGap(45, 45, 45)
+                        .addComponent(oddX)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(oddDois)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(151, 151, 151)
-                        .addComponent(jPanelAddEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(93, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 88, Short.MAX_VALUE)
+                        .addComponent(jLabel2)
+                        .addGap(80, 80, 80)
+                        .addComponent(jLabelEquipaDois)
+                        .addGap(64, 64, 64))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -165,9 +149,35 @@ public class EventoDialog extends javax.swing.JDialog {
                     .addComponent(oddUm)
                     .addComponent(oddX)
                     .addComponent(oddDois))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 57, Short.MAX_VALUE)
-                .addComponent(jPanelAddEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(31, 31, 31))
+                .addContainerGap(40, Short.MAX_VALUE))
+        );
+
+        jPanelAddEvento.setBackground(new java.awt.Color(255, 102, 102));
+        jPanelAddEvento.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jPanelAddEventoMouseClicked(evt);
+            }
+        });
+
+        jLabel14.setFont(new java.awt.Font("Avenir", 1, 13)); // NOI18N
+        jLabel14.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel14.setText("Adicionar Evento");
+
+        javax.swing.GroupLayout jPanelAddEventoLayout = new javax.swing.GroupLayout(jPanelAddEvento);
+        jPanelAddEvento.setLayout(jPanelAddEventoLayout);
+        jPanelAddEventoLayout.setHorizontalGroup(
+            jPanelAddEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanelAddEventoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel14)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanelAddEventoLayout.setVerticalGroup(
+            jPanelAddEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelAddEventoLayout.createSequentialGroup()
+                .addContainerGap(20, Short.MAX_VALUE)
+                .addComponent(jLabel14)
+                .addGap(17, 17, 17))
         );
 
         javax.swing.GroupLayout jPanelEventoLayout = new javax.swing.GroupLayout(jPanelEvento);
@@ -175,27 +185,110 @@ public class EventoDialog extends javax.swing.JDialog {
         jPanelEventoLayout.setHorizontalGroup(
             jPanelEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEventoLayout.createSequentialGroup()
-                .addGap(66, 66, 66)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanelEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanelEventoLayout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanelEventoLayout.createSequentialGroup()
+                        .addGap(206, 206, 206)
+                        .addComponent(jPanelAddEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 50, Short.MAX_VALUE))
         );
         jPanelEventoLayout.setVerticalGroup(
             jPanelEventoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelEventoLayout.createSequentialGroup()
-                .addGap(60, 60, 60)
+                .addGap(35, 35, 35)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(53, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelAddEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(134, 134, 134))
+        );
+
+        jPanel4.setBackground(new java.awt.Color(255, 102, 102));
+
+        jLabel1.setFont(new java.awt.Font("Avenir", 0, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel1.setText("Estado");
+
+        estado.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        estado.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                estadoActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Avenir", 0, 18)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(0, 0, 0));
+        jLabel3.setText("Resultado");
+
+        resultado.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        editaEstadoBtn.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
+        editaEstadoBtn.setText("Alterar");
+        editaEstadoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editaEstadoBtnActionPerformed(evt);
+            }
+        });
+
+        editaResBtn.setFont(new java.awt.Font("Avenir", 0, 13)); // NOI18N
+        editaResBtn.setText("Alterar");
+        editaResBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editaResBtnActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(23, 23, 23)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel1)
+                        .addComponent(resultado, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
+                        .addComponent(estado)
+                        .addComponent(jLabel3)
+                        .addComponent(editaEstadoBtn))
+                    .addComponent(editaResBtn))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addGap(30, 30, 30)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(estado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editaEstadoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(32, 32, 32)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(resultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(editaResBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 556, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanelEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanelEvento, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanelEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
@@ -214,19 +307,45 @@ public class EventoDialog extends javax.swing.JDialog {
             double odd = Double.valueOf(this.oddX.getText());
             this.aposta.addEventoToAposta(this.evento, odd);
             this.dispose();
-        }
+        } //else javax.swing.JOptionPane.showMessageDialog(this, "Apostas múltiplas não são permitidas!", "Aposta", 0);
     }//GEN-LAST:event_jPanelAddEventoMouseClicked
 
+    private void estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_estadoActionPerformed
+
+    private void editaEstadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editaEstadoBtnActionPerformed
+        // TODO add your handling code here:
+        this.betEss.alteraEstadoEvento(this.evento.getIdEvento());
+        this.setup();
+    }//GEN-LAST:event_editaEstadoBtnActionPerformed
+
+    private void editaResBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editaResBtnActionPerformed
+        // TODO add your handling code here:
+        String res = this.resultado.getText();
+        if(res.equals(this.jLabelEquipaUm) || res.equals(this.jLabelEquipaDois) || res.equals("EMPATE")){
+            this.betEss.novoResultado(this.evento.getIdEvento(), res);
+        }
+        else javax.swing.JOptionPane.showMessageDialog(this, "Resultado desconhecido!", "Evento", 0);
+    }//GEN-LAST:event_editaResBtnActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton editaEstadoBtn;
+    private javax.swing.JButton editaResBtn;
+    private javax.swing.JTextField estado;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabelEquipaDois;
     private javax.swing.JLabel jLabelEquipaUm;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanelAddEvento;
     private javax.swing.JPanel jPanelEvento;
     private javax.swing.JCheckBox oddDois;
     private javax.swing.JCheckBox oddUm;
     private javax.swing.JCheckBox oddX;
+    private javax.swing.JTextField resultado;
     // End of variables declaration//GEN-END:variables
 }
