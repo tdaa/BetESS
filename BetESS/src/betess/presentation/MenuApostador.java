@@ -1021,14 +1021,18 @@ public class MenuApostador extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnCarregarCoinsActionPerformed
 
     private void jPanelVerApostaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelVerApostaMouseClicked
-        DefaultTableModel model = (DefaultTableModel) this.jTableMinhasApostas.getModel();
-        int index = jTableMinhasApostas.getSelectedRow();
-        int idAposta = (int) model.getValueAt(index, 0);
+        try {
+            DefaultTableModel model = (DefaultTableModel) this.jTableMinhasApostas.getModel();
+            int index = jTableMinhasApostas.getSelectedRow();
+            int idAposta = (int) model.getValueAt(index, 0);
         
-        Aposta a = this.betEss.getApostador(user).getApostas().get(idAposta);
+            Aposta a = this.betEss.getApostador(user).getApostas().get(idAposta);
         
-        DialogAposta da = new DialogAposta(this, true, this.betEss, a);
-        da.setVisible(true);
+            DialogAposta da = new DialogAposta(this, true, this.betEss, a);
+            da.setVisible(true);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Nenhuma Aposta Disponível!", "Ver Aposta", 0);
+        }
     }//GEN-LAST:event_jPanelVerApostaMouseClicked
     
     
