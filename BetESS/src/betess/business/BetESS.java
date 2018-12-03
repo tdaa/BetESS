@@ -264,35 +264,61 @@ public class BetESS implements Serializable {
             for (String apostador: this.apostas.keySet()) {
                 LinkedList<Aposta> lista = this.apostas.get(apostador);
                 for (Aposta a: lista) {
-                    for (Evento e: a.getEventos().values()) {      
-                        if (e.getIdEvento() == idEvento) {
-                            // Atualiza estado no Map apostador-aposta.
-                            e.setEstado("FECHADO");
+                    if(!a.IsTerminada()){
+                        for (Evento e: a.getEventos().values()) {      
+                            if (e.getIdEvento() == idEvento) {
+                                // Atualiza estado no Map apostador-aposta.
+                                e.setEstado("FECHADO");
                             
-                            // Atualiza estado nas apostas do apostador.
-                            this.apostadores.get(apostador)
-                                    .getApostas()
-                                    .get(a.getIdAposta())
-                                    .getEventos()
-                                    .get(idEvento)
-                                    .setEstado("FECHADO");
-                        }
+                                // Atualiza estado nas apostas do apostador.
+                                this.apostadores.get(apostador)
+                                        .getApostas()
+                                        .get(a.getIdAposta())
+                                        .getEventos()
+                                        .get(idEvento)
+                                        .setEstado("FECHADO");
+                            }
                         
-                        if (!e.getEstado().equals("FECHADO")) {
-                            terminada = false;
+                            if (!e.getEstado().equals("FECHADO")) {
+                                terminada = false;
+                            }
                         }
-                    }
                     
-                    // Se a aposta estiver terminada, é calculado o ganho.
-                    if (terminada) {
-                        a.setTerminada(true);
-                        this.apostadores.get(apostador).addTotalCoins(a.getGanhoTotal());
+                        // Se a aposta estiver terminada, é calculado o ganho.
+                        if (terminada) {
+                            a.setTerminada(true);
+                            verificaVitoria(a, apostador);
+                        
+                        }
                     }
                 }
+                    
             }
-            
-        }        
+        }      
+        this.eventos.remove(idEvento);
     }
+    
+    public void verificaVitoria(Aposta a, String user){
+        boolean vitoria = true;
+        double oddApostada;
+        String resultado = "";
+        for(Evento e: a.getEventos().values()){
+            
+            //Guarda a odd apostada neste evento.
+            oddApostada = a.getOdds().get(e.getIdEvento());
+            
+            //Procura a equipa na qual apostou baseado na odd.
+            if(e.getOddUm() == oddApostada) resultado = e.getEquipaUm();
+            if(e.getOddDois() == oddApostada) resultado = e.getEquipaDois();
+            if(e.getOddX() == oddApostada) resultado = "EMPATE";
+            
+            //Verifica se acertou no resultado.
+            if(!resultado.equals(e.getResultado())) vitoria = false;
+        }
+        
+        if(vitoria) this.apostadores.get(user).addTotalCoins(a.getGanhoTotal());
+    }
+         
     
     /**
      * Método novoResultado(...)
