@@ -80,8 +80,6 @@ public class MenuApostador extends javax.swing.JFrame {
         jTextHome_Coins = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTableEventos = new javax.swing.JTable();
-        jLabel6 = new javax.swing.JLabel();
-        jTextHome_Eventos = new javax.swing.JTextField();
         jPanelConsultarEvento = new javax.swing.JPanel();
         jLabel16 = new javax.swing.JLabel();
         jPanelCarregarCoins = new javax.swing.JPanel();
@@ -485,12 +483,6 @@ public class MenuApostador extends javax.swing.JFrame {
         jTableEventos.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(jTableEventos);
 
-        jLabel6.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setText("Eventos");
-
-        jTextHome_Eventos.setEditable(false);
-
         jPanelConsultarEvento.setBackground(new java.awt.Color(255, 102, 102));
         jPanelConsultarEvento.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
@@ -561,13 +553,9 @@ public class MenuApostador extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jTextHome_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelMain_HomeLayout.createSequentialGroup()
-                                .addGroup(jPanelMain_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabelHome_Coins)
-                                    .addComponent(jLabel6))
+                                .addComponent(jLabelHome_Coins)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 33, Short.MAX_VALUE)
-                                .addGroup(jPanelMain_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTextHome_Coins, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
-                                    .addComponent(jTextHome_Eventos))))
+                                .addComponent(jTextHome_Coins, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addGroup(jPanelMain_HomeLayout.createSequentialGroup()
                         .addGroup(jPanelMain_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
@@ -590,17 +578,13 @@ public class MenuApostador extends javax.swing.JFrame {
                 .addGroup(jPanelMain_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabelHome_Coins)
                     .addComponent(jTextHome_Coins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanelMain_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextHome_Eventos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6))
-                .addGap(35, 35, 35)
+                .addGap(77, 77, 77)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(jPanelMain_HomeLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanelConsultarEvento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jPanelCarregarCoins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(66, Short.MAX_VALUE))
+                .addContainerGap(72, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelMain_Home, new org.netbeans.lib.awtextra.AbsoluteConstraints(161, 0, 890, 680));
@@ -995,6 +979,9 @@ public class MenuApostador extends javax.swing.JFrame {
             
             // Número de ESSCoins em home é atualizado.
             jTextHome_Coins.setText("" + this.betEss.getApostador(this.user).getEssCoins());
+            
+            // Número de ESSCoins em profile é atualizado.
+            jTextProfile_Coins.setText("" + this.betEss.getApostador(this.user).getEssCoins());
         
             jPanelMain_Home.setVisible(false);
             jPanelMain_Profile.setVisible(false);
@@ -1028,6 +1015,9 @@ public class MenuApostador extends javax.swing.JFrame {
         
         // Atualizada as coins mostradas no menu Home.
         jTextHome_Coins.setText("" + this.betEss.getApostador(this.user).getEssCoins());
+        
+        //Atualizadas as coins mostradas no menu Profile
+        jTextProfile_Coins.setText("" + this.betEss.getApostador(this.user).getEssCoins());
     }//GEN-LAST:event_BtnCarregarCoinsActionPerformed
 
     private void jPanelVerApostaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelVerApostaMouseClicked
@@ -1171,7 +1161,6 @@ public class MenuApostador extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -1206,7 +1195,6 @@ public class MenuApostador extends javax.swing.JFrame {
     private javax.swing.JTable jTableEventos;
     private javax.swing.JTable jTableMinhasApostas;
     private javax.swing.JTextField jTextHome_Coins;
-    private javax.swing.JTextField jTextHome_Eventos;
     private javax.swing.JTextField jTextHome_Nome;
     private javax.swing.JTextField jTextProfile_Coins;
     private javax.swing.JTextField jTextProfile_Email;
