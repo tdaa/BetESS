@@ -15,11 +15,13 @@ public class Aposta implements Serializable {
     private Map<Integer, Evento> eventos;
     private Map<Integer, Double> oddsApostadas;
     private double valor;
+    private boolean isTerminada;
 
     public Aposta() {
         this.eventos = new HashMap<>();
         this.oddsApostadas = new HashMap<>();
         this.valor = 0;
+        this.isTerminada = false;
     }
 
     public Aposta(int id) {
@@ -27,6 +29,7 @@ public class Aposta implements Serializable {
         this.eventos = new HashMap<>();
         this.oddsApostadas = new HashMap<>();
         this.valor = 0;
+        this.isTerminada = false;
     }
     
     public Aposta(Aposta a) {
@@ -34,15 +37,17 @@ public class Aposta implements Serializable {
         this.valor = a.getValor();
         this.eventos = a.getEventos();
         this.oddsApostadas = a.getOdds();
+        this.isTerminada = a.IsTerminada();
     }
     
     public Aposta(int idAposta, Map<Integer, Evento> eventos, 
-                  Map<Integer, Double> odds, double valor) 
+                  Map<Integer, Double> odds, double valor, boolean isTerminada) 
     {
         this.idAposta = idAposta;
         this.setEventos(eventos);
         this.setOdds(odds);
         this.valor = valor;
+        this.isTerminada = isTerminada;
     }
 
     /**
@@ -112,6 +117,14 @@ public class Aposta implements Serializable {
                 .stream()
                 .mapToDouble(d -> d)
                 .sum();
+    }
+    
+    public boolean IsTerminada(){
+        return this.isTerminada;
+    }
+    
+    public void setTerminada(boolean t){
+        this.isTerminada = t;
     }
     
     public double getGanhoTotal() {

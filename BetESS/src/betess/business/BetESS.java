@@ -259,6 +259,7 @@ public class BetESS implements Serializable {
     public void alteraEstadoEvento(int idEvento) {
         if (this.eventos.containsKey(idEvento)){
             this.eventos.get(idEvento).setEstado("FECHADO");
+            boolean terminada = true;
             
             for (String apostador: this.apostas.keySet()) {
                 LinkedList<Aposta> lista = this.apostas.get(apostador);
@@ -276,6 +277,15 @@ public class BetESS implements Serializable {
                                     .get(idEvento)
                                     .setEstado("FECHADO");
                         }
+                        
+                        if(!e.getEstado().equals("FECHADO")){
+                            terminada = false;
+                        }
+                    }
+                    
+                    if(terminada){
+                        a.setTerminada(true);
+                        this.apostadores.get(apostador).addTotalCoins(a.getGanhoTotal());
                     }
                 }
             }

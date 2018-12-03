@@ -322,7 +322,7 @@ public class EventoDialog extends javax.swing.JDialog {
     private void editaResBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editaResBtnActionPerformed
         // TODO add your handling code here:
         String res = this.resultado.getText();
-        if(res.equals(this.jLabelEquipaUm) || res.equals(this.jLabelEquipaDois) || res.equals("EMPATE")){
+        if(res.equals(this.jLabelEquipaUm.getText()) || res.equals(this.jLabelEquipaDois.getText()) || res.equals("EMPATE")){
             this.betEss.novoResultado(this.evento.getIdEvento(), res);
         }
         else javax.swing.JOptionPane.showMessageDialog(this, "Resultado desconhecido!", "Evento", 0);
