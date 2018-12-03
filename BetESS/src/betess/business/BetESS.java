@@ -257,7 +257,7 @@ public class BetESS implements Serializable {
      * @param idEvento
      */
     public void alteraEstadoEvento(int idEvento) {
-        if (this.eventos.containsKey(idEvento)){
+        if (this.eventos.containsKey(idEvento)) {
             this.eventos.get(idEvento).setEstado("FECHADO");
             boolean terminada = true;
             
@@ -278,12 +278,13 @@ public class BetESS implements Serializable {
                                     .setEstado("FECHADO");
                         }
                         
-                        if(!e.getEstado().equals("FECHADO")){
+                        if (!e.getEstado().equals("FECHADO")) {
                             terminada = false;
                         }
                     }
                     
-                    if(terminada){
+                    // Se a aposta estiver terminada, é calculado o ganho.
+                    if (terminada) {
                         a.setTerminada(true);
                         this.apostadores.get(apostador).addTotalCoins(a.getGanhoTotal());
                     }

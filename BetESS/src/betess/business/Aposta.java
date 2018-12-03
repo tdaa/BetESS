@@ -104,15 +104,6 @@ public class Aposta implements Serializable {
     }
     
     public double getTotalOdds() {
-        /*
-        //BUG!!!! odssApostadas está a NULL!!!!
-        double total = 0;
-        
-        if (this.oddsApostadas == null)
-            total = 2;
-        
-        return total; */
-        
         return this.oddsApostadas.values()
                 .stream()
                 .mapToDouble(d -> d)

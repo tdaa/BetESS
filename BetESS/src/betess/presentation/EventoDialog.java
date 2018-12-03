@@ -3,9 +3,7 @@ package betess.presentation;
 import betess.business.Aposta;
 import betess.business.BetESS;
 import betess.business.Evento;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-import javax.swing.JTextField;
+import javax.swing.DefaultComboBoxModel;
 
 /**
  * 
@@ -39,23 +37,40 @@ public class EventoDialog extends javax.swing.JDialog {
     }
     
     private void setup() {
-        this.jLabelEquipaUm.setText(this.evento.getEquipaUm());
-        this.jLabelEquipaDois.setText(this.evento.getEquipaDois());
+        String equipa1 = this.evento.getEquipaUm();
+        String equipa2 = this.evento.getEquipaDois();
+        
+        this.jLabelEquipaUm.setText(equipa1);
+        this.jLabelEquipaDois.setText(equipa2);
         this.oddUm.setText(String.valueOf(this.evento.getOddUm()));
         this.oddX.setText(String.valueOf(this.evento.getOddX()));
         this.oddDois.setText(String.valueOf(this.evento.getOddDois()));
         this.estado.setText(this.evento.getEstado());
         this.resultado.setText(this.evento.getResultado());
-        if(this.betEss.getUser().equals("betadmin@betess.pt")){
-            this.estado.setEditable(false);
-            this.resultado.setEditable(true);
-            this.jPanelAddEvento.setVisible(false);
+        
+        // Confirmar a existência dos elementos.
+        DefaultComboBoxModel model = (DefaultComboBoxModel) jComboBoxResultados.getModel();
+        if (model.getIndexOf(equipa1) == -1 &&
+            model.getIndexOf("EMPATE") == -1 &&
+            model.getIndexOf(equipa2) == -1)
+        {
+            model.addElement(equipa1);
+            model.addElement("EMPATE");
+            model.addElement(equipa2);
         }
-        else{
+        
+        if (this.betEss.getUser().equals("betadmin@betess.pt")) {
             this.estado.setEditable(false);
-            this.resultado.setEditable(false);
+            //this.resultado.setEditable(true);
+            this.resultado.setVisible(false);
+            this.jPanelAddEvento.setVisible(false);
+        } else {
+            this.estado.setEditable(false);
             this.editaEstadoBtn.setVisible(false);
             this.editaResBtn.setVisible(false);
+            this.jLabel3.setVisible(false);
+            this.jComboBoxResultados.setVisible(false);
+            this.resultado.setEditable(false);
         }
     }
 
@@ -85,6 +100,7 @@ public class EventoDialog extends javax.swing.JDialog {
         resultado = new javax.swing.JTextField();
         editaEstadoBtn = new javax.swing.JButton();
         editaResBtn = new javax.swing.JButton();
+        jComboBoxResultados = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setResizable(false);
@@ -245,6 +261,7 @@ public class EventoDialog extends javax.swing.JDialog {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jComboBoxResultados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addComponent(jLabel1)
                         .addComponent(resultado, javax.swing.GroupLayout.DEFAULT_SIZE, 126, Short.MAX_VALUE)
@@ -252,7 +269,7 @@ public class EventoDialog extends javax.swing.JDialog {
                         .addComponent(jLabel3)
                         .addComponent(editaEstadoBtn))
                     .addComponent(editaResBtn))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(40, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -265,11 +282,13 @@ public class EventoDialog extends javax.swing.JDialog {
                 .addComponent(editaEstadoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jComboBoxResultados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(resultado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(editaResBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(37, 37, 37))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -284,9 +303,11 @@ public class EventoDialog extends javax.swing.JDialog {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanelEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addComponent(jPanelEvento, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -310,28 +331,30 @@ public class EventoDialog extends javax.swing.JDialog {
     }//GEN-LAST:event_jPanelAddEventoMouseClicked
 
     private void estadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_estadoActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_estadoActionPerformed
 
     private void editaEstadoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editaEstadoBtnActionPerformed
-        // TODO add your handling code here:
         this.betEss.alteraEstadoEvento(this.evento.getIdEvento());
         this.setup();
     }//GEN-LAST:event_editaEstadoBtnActionPerformed
 
     private void editaResBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editaResBtnActionPerformed
-        // TODO add your handling code here:
-        String res = this.resultado.getText();
-        if(res.equals(this.jLabelEquipaUm.getText()) || res.equals(this.jLabelEquipaDois.getText()) || res.equals("EMPATE")){
+        String res = (String) this.jComboBoxResultados.getSelectedItem();
+        
+        //if (res.equals(this.jLabelEquipaUm.getText()) || 
+          //  res.equals(this.jLabelEquipaDois.getText()) || 
+            //res.equals("EMPATE"))
             this.betEss.novoResultado(this.evento.getIdEvento(), res);
-        }
-        else javax.swing.JOptionPane.showMessageDialog(this, "Resultado desconhecido!", "Evento", 0);
+       // else 
+         //   javax.swing.JOptionPane.showMessageDialog(this, "Resultado desconhecido!", "Evento", 0);
     }//GEN-LAST:event_editaResBtnActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton editaEstadoBtn;
     private javax.swing.JButton editaResBtn;
     private javax.swing.JTextField estado;
+    private javax.swing.JComboBox<String> jComboBoxResultados;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
