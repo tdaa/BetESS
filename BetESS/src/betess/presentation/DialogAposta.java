@@ -41,7 +41,8 @@ public class DialogAposta extends javax.swing.JDialog {
                 e.getEquipaUm(),
                 e.getEquipaDois(),
                 this.aposta.getOdds().get(e.getIdEvento()),
-                e.getEstado()
+                e.getEstado(),
+                e.getResultado()
             });
         });
         
@@ -79,12 +80,13 @@ public class DialogAposta extends javax.swing.JDialog {
 
         jPanel1.setBackground(new java.awt.Color(36, 47, 65));
 
+        jTableAposta.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
         jTableAposta.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Equipa Casa", "Equipa Fora", "Odd Apostada", "Estado"
+                "ID", "Equipa Casa", "Equipa Fora", "Odd Apostada", "Estado", "Resultado"
             }
         ));
         jScrollPane5.setViewportView(jTableAposta);
@@ -93,17 +95,17 @@ public class DialogAposta extends javax.swing.JDialog {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(18, Short.MAX_VALUE)
+                .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 492, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(31, 31, 31)
+                .addGap(35, 35, 35)
                 .addComponent(jScrollPane5, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
