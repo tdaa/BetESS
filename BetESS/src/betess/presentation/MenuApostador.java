@@ -993,18 +993,22 @@ public class MenuApostador extends javax.swing.JFrame {
     }//GEN-LAST:event_BtnSubmeterCoinsActionPerformed
 
     private void jPanelRemEventoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanelRemEventoMouseClicked
-        DefaultTableModel model = (DefaultTableModel) jTableAposta.getModel();
-        int index = jTableAposta.getSelectedRow();
-        int idEvento = (int) model.getValueAt(index, 0);
-        
-        // Determinar qual o evento selecionado.
-        Evento e = this.betEss.getEvento(idEvento);
-        
-        // Remover evento selecionado da Aposta atual.
-        this.newAposta.remEventoFromAposta(e);
-        
-        // Atualizar tabela de eventos.
-        setupApostaAtual();
+        try {    
+            DefaultTableModel model = (DefaultTableModel) jTableAposta.getModel();
+            int index = jTableAposta.getSelectedRow();
+            int idEvento = (int) model.getValueAt(index, 0);
+
+            // Determinar qual o evento selecionado.
+            Evento e = this.betEss.getEvento(idEvento);
+
+            // Remover evento selecionado da Aposta atual.
+            this.newAposta.remEventoFromAposta(e);
+
+            // Atualizar tabela de eventos.
+            setupApostaAtual();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Nenhum evento selecionado!", "Remover Evento", 0);
+        }
     }//GEN-LAST:event_jPanelRemEventoMouseClicked
 
     private void BtnCarregarCoinsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BtnCarregarCoinsActionPerformed

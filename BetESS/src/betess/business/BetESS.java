@@ -264,7 +264,7 @@ public class BetESS implements Serializable {
             for (String apostador: this.apostas.keySet()) {
                 LinkedList<Aposta> lista = this.apostas.get(apostador);
                 for (Aposta a: lista) {
-                    if(!a.IsTerminada()){
+                    if (!a.IsTerminada()) {
                         for (Evento e: a.getEventos().values()) {      
                             if (e.getIdEvento() == idEvento) {
                                 // Atualiza estado no Map apostador-aposta.
@@ -287,8 +287,7 @@ public class BetESS implements Serializable {
                         // Se a aposta estiver terminada, é calculado o ganho.
                         if (terminada) {
                             a.setTerminada(true);
-                            verificaVitoria(a, apostador);
-                        
+                            verificaVitoria(a, apostador);              
                         }
                     }
                 }
@@ -298,28 +297,39 @@ public class BetESS implements Serializable {
         this.eventos.remove(idEvento);
     }
     
-    public void verificaVitoria(Aposta a, String user){
+    /**
+     * Métoto verificaVitoria(...).
+     * Verifica se a aposta finalizada de um apostador está toda certa.
+     * 
+     * @param a
+     * @param user 
+     */
+    public void verificaVitoria(Aposta a, String user) {
         boolean vitoria = true;
         double oddApostada;
         String resultado = "";
-        for(Evento e: a.getEventos().values()){
-            
-            //Guarda a odd apostada neste evento.
+        
+        for (Evento e: a.getEventos().values()) {       
+            // Guarda a odd apostada neste evento.
             oddApostada = a.getOdds().get(e.getIdEvento());
             
-            //Procura a equipa na qual apostou baseado na odd.
-            if(e.getOddUm() == oddApostada) resultado = e.getEquipaUm();
-            if(e.getOddDois() == oddApostada) resultado = e.getEquipaDois();
-            if(e.getOddX() == oddApostada) resultado = "EMPATE";
+            // Procura a equipa na qual apostou baseado na odd.
+            if (e.getOddUm() == oddApostada) 
+                resultado = e.getEquipaUm();
+            if (e.getOddDois() == oddApostada) 
+                resultado = e.getEquipaDois();
+            if (e.getOddX() == oddApostada) 
+                resultado = "EMPATE";
             
-            //Verifica se acertou no resultado.
-            if(!resultado.equals(e.getResultado())) vitoria = false;
+            // Verifica se acertou no resultado.
+            if (!resultado.equals(e.getResultado()))
+                vitoria = false;
         }
         
-        if(vitoria) this.apostadores.get(user).addTotalCoins(a.getGanhoTotal());
+        if (vitoria) 
+            this.apostadores.get(user).addTotalCoins(a.getGanhoTotal());
     }
-         
-    
+           
     /**
      * Método novoResultado(...)
      * Atualiza o resultado de um evento.
