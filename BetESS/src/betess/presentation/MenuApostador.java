@@ -93,6 +93,12 @@ public class MenuApostador extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
+        editaNomeBtn = new javax.swing.JButton();
+        editaPassBtn = new javax.swing.JButton();
+        editaEmailbtn = new javax.swing.JButton();
+        confirmaNome = new javax.swing.JButton();
+        confirmaEmail = new javax.swing.JButton();
+        confirmaPass = new javax.swing.JButton();
         jPanelMain_Aposta = new javax.swing.JPanel();
         jPanelApostar = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
@@ -592,6 +598,18 @@ public class MenuApostador extends javax.swing.JFrame {
         jPanelMain_Profile.setBackground(new java.awt.Color(36, 47, 65));
         jPanelMain_Profile.setPreferredSize(new java.awt.Dimension(840, 617));
 
+        jTextProfile_Nome.setEditable(false);
+        jTextProfile_Nome.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        jTextProfile_Email.setEditable(false);
+        jTextProfile_Email.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        jTextProfile_Password.setEditable(false);
+        jTextProfile_Password.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        jTextProfile_Coins.setEditable(false);
+        jTextProfile_Coins.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
         jLabel1.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Nome");
@@ -608,49 +626,114 @@ public class MenuApostador extends javax.swing.JFrame {
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("ESSCoins");
 
+        editaNomeBtn.setText("Editar");
+        editaNomeBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editaNomeBtnActionPerformed(evt);
+            }
+        });
+
+        editaPassBtn.setText("Editar");
+        editaPassBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editaPassBtnActionPerformed(evt);
+            }
+        });
+
+        editaEmailbtn.setText("Editar");
+        editaEmailbtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                editaEmailbtnActionPerformed(evt);
+            }
+        });
+
+        confirmaNome.setText("Confirmar");
+        confirmaNome.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmaNomeActionPerformed(evt);
+            }
+        });
+
+        confirmaEmail.setText("Confirmar");
+        confirmaEmail.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmaEmailActionPerformed(evt);
+            }
+        });
+
+        confirmaPass.setText("Confirmar");
+        confirmaPass.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                confirmaPassActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanelMain_ProfileLayout = new javax.swing.GroupLayout(jPanelMain_Profile);
         jPanelMain_Profile.setLayout(jPanelMain_ProfileLayout);
         jPanelMain_ProfileLayout.setHorizontalGroup(
             jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMain_ProfileLayout.createSequentialGroup()
-                .addGap(91, 91, 91)
-                .addGroup(jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelMain_ProfileLayout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(jTextProfile_Coins, javax.swing.GroupLayout.DEFAULT_SIZE, 487, Short.MAX_VALUE))
-                    .addGroup(jPanelMain_ProfileLayout.createSequentialGroup()
+                        .addGap(79, 79, 79)
                         .addGroup(jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel4))
-                        .addGap(12, 12, 12)
-                        .addGroup(jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jTextProfile_Email, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 488, Short.MAX_VALUE)
-                            .addComponent(jTextProfile_Nome, javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextProfile_Password))))
-                .addContainerGap(235, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel2))
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel4)))
+                    .addGroup(jPanelMain_ProfileLayout.createSequentialGroup()
+                        .addGap(126, 126, 126)
+                        .addGroup(jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jTextProfile_Password, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextProfile_Coins, javax.swing.GroupLayout.PREFERRED_SIZE, 487, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextProfile_Email, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextProfile_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, 488, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanelMain_ProfileLayout.createSequentialGroup()
+                                .addComponent(editaPassBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(confirmaPass))
+                            .addGroup(jPanelMain_ProfileLayout.createSequentialGroup()
+                                .addComponent(editaEmailbtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(confirmaEmail))
+                            .addGroup(jPanelMain_ProfileLayout.createSequentialGroup()
+                                .addComponent(editaNomeBtn)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(confirmaNome)))))
+                .addContainerGap(99, Short.MAX_VALUE))
         );
         jPanelMain_ProfileLayout.setVerticalGroup(
             jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelMain_ProfileLayout.createSequentialGroup()
-                .addGap(112, 112, 112)
+                .addGap(126, 126, 126)
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextProfile_Nome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                    .addComponent(editaNomeBtn)
+                    .addComponent(confirmaNome))
+                .addGap(29, 29, 29)
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextProfile_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addGap(18, 18, 18)
+                    .addComponent(editaEmailbtn)
+                    .addComponent(confirmaEmail))
+                .addGap(23, 23, 23)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextProfile_Password, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4))
+                    .addComponent(editaPassBtn)
+                    .addComponent(confirmaPass))
                 .addGap(18, 18, 18)
-                .addGroup(jPanelMain_ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextProfile_Coins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(414, Short.MAX_VALUE))
+                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jTextProfile_Coins, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(252, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanelMain_Profile, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, 890, 680));
@@ -1038,6 +1121,48 @@ public class MenuApostador extends javax.swing.JFrame {
             javax.swing.JOptionPane.showMessageDialog(this, "Nenhuma Aposta Disponível!", "Ver Aposta", 0);
         }
     }//GEN-LAST:event_jPanelVerApostaMouseClicked
+
+    private void editaEmailbtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editaEmailbtnActionPerformed
+        // TODO add your handling code here:
+        this.jTextProfile_Email.setEditable(true);
+    }//GEN-LAST:event_editaEmailbtnActionPerformed
+
+    private void editaNomeBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editaNomeBtnActionPerformed
+        // botao editar nome
+        this.jTextProfile_Nome.setEditable(true);
+    }//GEN-LAST:event_editaNomeBtnActionPerformed
+
+    private void editaPassBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_editaPassBtnActionPerformed
+        // TODO add your handling code here:
+        this.jTextProfile_Password.setEditable(true);
+    }//GEN-LAST:event_editaPassBtnActionPerformed
+
+    private void confirmaNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmaNomeActionPerformed
+        // TODO add your handling code here:
+        String s = this.jTextProfile_Nome.getText();
+        if(s!=null){
+            this.betEss.editaNomeUser(s);
+            this.updateProfile();
+        }
+    }//GEN-LAST:event_confirmaNomeActionPerformed
+
+    private void confirmaEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmaEmailActionPerformed
+        // TODO add your handling code here:
+        String s = this.jTextProfile_Email.getText();
+        if(s!=null){
+            this.betEss = this.betEss.editaMailUser(s);
+            this.updateProfile();
+        }
+    }//GEN-LAST:event_confirmaEmailActionPerformed
+
+    private void confirmaPassActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_confirmaPassActionPerformed
+        // TODO add your handling code here:
+        String s = this.jTextProfile_Password.getText();
+        if(s!=null){
+            this.betEss.editaPassUser(s);
+            this.updateProfile();
+        }
+    }//GEN-LAST:event_confirmaPassActionPerformed
     
     
     /* ******************************* *
@@ -1077,6 +1202,18 @@ public class MenuApostador extends javax.swing.JFrame {
         
         // Menu de Minhas Apostas não visível.
         jPanelMain_MinhasApostas.setVisible(false);
+    }
+    
+    private void updateProfile(){
+        Apostador a = this.betEss.getApostador(this.user);
+        
+        // Caixas de texto de Profile
+        jTextProfile_Nome.setText(a.getNome());
+        jTextProfile_Nome.setEditable(false);
+        jTextProfile_Email.setText(a.getEmail());
+        jTextProfile_Email.setEditable(false);
+        jTextProfile_Password.setText(a.getPassword());
+        jTextProfile_Password.setEditable(false);
     }
     
     private void setupApostaAtual() {
@@ -1150,6 +1287,12 @@ public class MenuApostador extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton BtnCarregarCoins;
     private javax.swing.JButton BtnSubmeterCoins;
+    private javax.swing.JButton confirmaEmail;
+    private javax.swing.JButton confirmaNome;
+    private javax.swing.JButton confirmaPass;
+    private javax.swing.JButton editaEmailbtn;
+    private javax.swing.JButton editaNomeBtn;
+    private javax.swing.JButton editaPassBtn;
     private javax.swing.JLabel ganhos;
     private javax.swing.JPanel indAposta;
     private javax.swing.JPanel indHome;

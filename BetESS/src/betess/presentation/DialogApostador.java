@@ -5,10 +5,13 @@
  */
 package betess.presentation;
 
+import betess.business.Aposta;
 import betess.business.Apostador;
 import betess.business.BetESS;
+import betess.business.Evento;
 import java.util.Map;
 import javax.swing.DefaultListModel;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -35,16 +38,33 @@ public class DialogApostador extends javax.swing.JDialog {
     }
     
     public void atualizaFrame(){
-        this.Email.setText(user);
+        this.email.setText(user);
         Apostador a = this.betEss.getApostador(user);
         if(a != null){
-            this.Nome.setText(a.getNome());
+            this.nome.setText(a.getNome());
             atualizaLista();
         }
     }
     
     public void atualizaLista(){
+        DefaultTableModel model = (DefaultTableModel) this.jTableMinhasApostas.getModel();
         
+        for(Aposta a: this.betEss.getApostasUser(this.user)){
+            for(Evento e: a.getEventos().values()){
+                model.addRow(new  Object[] {
+                    a.getIdAposta(),
+                    a.getIsTerminada(),
+                    e.getIdEvento(),
+                    e.getEquipaUm(),
+                    e.getEquipaDois(),
+                    a.getGanhoTotal(),
+                    a.getResultadoApostado(e),
+                    e.getResultado()
+                });
+            }
+        }
+        
+        jTableMinhasApostas.setModel(model); 
     }
 
     /**
@@ -65,8 +85,11 @@ public class DialogApostador extends javax.swing.JDialog {
         jPanel2 = new javax.swing.JPanel();
         Email = new javax.swing.JLabel();
         Nome = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jList1 = new javax.swing.JList<>();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTableMinhasApostas = new javax.swing.JTable();
+        jLabel6 = new javax.swing.JLabel();
+        nome = new javax.swing.JLabel();
+        email = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -122,44 +145,84 @@ public class DialogApostador extends javax.swing.JDialog {
                 .addComponent(jLabel5)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel4)
-                .addContainerGap(76, Short.MAX_VALUE))
+                .addContainerGap(116, Short.MAX_VALUE))
         );
 
-        Email.setFont(new java.awt.Font("Avenir", 0, 18)); // NOI18N
-        Email.setText("jLabel6");
+        Email.setFont(new java.awt.Font("Avenir", 0, 24)); // NOI18N
+        Email.setText("Email");
 
-        Nome.setFont(new java.awt.Font("Avenir", 0, 18)); // NOI18N
-        Nome.setText("jLabel6");
+        Nome.setFont(new java.awt.Font("Avenir", 0, 24)); // NOI18N
+        Nome.setText("Nome");
 
-        jList1.setModel(new javax.swing.AbstractListModel<String>() {
-            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
-            public int getSize() { return strings.length; }
-            public String getElementAt(int i) { return strings[i]; }
+        jTableMinhasApostas.setFont(new java.awt.Font("Lucida Grande", 0, 14)); // NOI18N
+        jTableMinhasApostas.setForeground(new java.awt.Color(102, 102, 102));
+        jTableMinhasApostas.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "ID Aposta", "Terminada", "iD Evento", "Equipa Casa", "Equipa Fora", "Ganho Possivel", "Resultado Apostado", "Resultado Final"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, true, true, true, true, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
         });
-        jScrollPane1.setViewportView(jList1);
+        jScrollPane3.setViewportView(jTableMinhasApostas);
+
+        jLabel6.setFont(new java.awt.Font("Avenir", 0, 18)); // NOI18N
+        jLabel6.setText("Lista de Apostas");
+
+        nome.setFont(new java.awt.Font("Avenir", 0, 24)); // NOI18N
+        nome.setForeground(new java.awt.Color(0, 0, 0));
+        nome.setText("jLabel7");
+
+        email.setFont(new java.awt.Font("Avenir", 0, 24)); // NOI18N
+        email.setForeground(new java.awt.Color(0, 0, 0));
+        email.setText("jLabel8");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(62, 62, 62)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Nome)
-                    .addComponent(Email)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 396, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(71, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(27, 27, 27)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 895, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(184, 184, 184)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(Email)
+                            .addComponent(Nome))
+                        .addGap(41, 41, 41)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(nome)
+                            .addComponent(email))))
+                .addContainerGap(30, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(63, 63, 63)
-                .addComponent(Nome)
-                .addGap(38, 38, 38)
-                .addComponent(Email)
-                .addGap(39, 39, 39)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Nome)
+                    .addComponent(nome))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(Email)
+                    .addComponent(email))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 241, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(43, 43, 43))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -169,7 +232,8 @@ public class DialogApostador extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(7, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -182,17 +246,25 @@ public class DialogApostador extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel Email;
     private javax.swing.JLabel Nome;
+    private javax.swing.JLabel email;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JList<String> jList1;
+    private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JPanel jPanelVerAposta;
+    private javax.swing.JPanel jPanelVerAposta1;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTableMinhasApostas;
+    private javax.swing.JLabel nome;
     // End of variables declaration//GEN-END:variables
 }
