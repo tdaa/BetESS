@@ -228,33 +228,41 @@ public class BetESS implements Serializable {
     }
     
     /**
+     * Método editaNomeUser(...).
      * Atualiza o nome de um apostador.
+     * 
      * @param novoNome
      */
-    public void editaNomeUser(String novoNome){
+    public void editaNomeUser(String novoNome) {
         this.apostadores.get(user).setNome(novoNome);
         this.apostadores.replace(user, this.apostadores.get(user));
     }
     
     /**
+     * Método editaPassUser(...).
      * Atualiza a password de um apostador.
+     * 
      * @param novaPass
      */
-    public void editaPassUser(String novaPass){
+    public void editaPassUser(String novaPass) {
         this.apostadores.get(user).setPassword(novaPass);
         this.apostadores.replace(user, this.apostadores.get(user));
     }
     
     /**
-     * Atualiza o emial de um apostador.
+     * Método editaMailUser(...).
+     * Atualiza o email de um apostador.
+     * 
      * @param email
      */
-    public BetESS editaMailUser(String email){
+    public BetESS editaMailUser(String email) {
         Apostador a = this.apostadores.get(user);
         a.setEmail(email);
+        
         this.apostadores.remove(user);
         this.apostadores.put(email, a);
         this.user = email;
+        
         return this;
     }
     
@@ -324,7 +332,8 @@ public class BetESS implements Serializable {
                 }
                     
             }
-        }      
+        }
+        
         this.eventos.remove(idEvento);
     }
     
@@ -426,6 +435,5 @@ public class BetESS implements Serializable {
      */
     public void endApp() {
         this.bd.writeData("betdata.obj", this);
-    }
-    
+    }   
 }
