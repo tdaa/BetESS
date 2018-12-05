@@ -127,18 +127,22 @@ public class Aposta implements Serializable {
     }
     
     /**
+     * Método getResultadoApostador(...).
      *
-     * @param odd
-     * @param idEvento
+     * @param e
      * @return Resultado apostado num determinado evento.
      */
-    public String getResultadoApostado(Evento e){
+    public String getResultadoApostado(Evento e) {
         double odd = this.oddsApostadas.get(e.getIdEvento());
-        if(e.getOddUm() == odd)
+        
+        if (e.getOddUm() == odd)
             return e.getEquipaUm();
-        if(e.getOddDois() == odd)
+        
+        if (e.getOddDois() == odd)
             return e.getEquipaDois();
-        else return "EMPATE";
+        
+        else 
+            return "EMPATE";
     }
 
     /**
