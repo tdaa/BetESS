@@ -227,6 +227,37 @@ public class BetESS implements Serializable {
         return c;
     }
     
+    /**
+     * Atualiza o nome de um apostador.
+     * @param novoNome
+     */
+    public void editaNomeUser(String novoNome){
+        this.apostadores.get(user).setNome(novoNome);
+        this.apostadores.replace(user, this.apostadores.get(user));
+    }
+    
+    /**
+     * Atualiza a password de um apostador.
+     * @param novaPass
+     */
+    public void editaPassUser(String novaPass){
+        this.apostadores.get(user).setPassword(novaPass);
+        this.apostadores.replace(user, this.apostadores.get(user));
+    }
+    
+    /**
+     * Atualiza o emial de um apostador.
+     * @param email
+     */
+    public BetESS editaMailUser(String email){
+        Apostador a = this.apostadores.get(user);
+        a.setEmail(email);
+        this.apostadores.remove(user);
+        this.apostadores.put(email, a);
+        this.user = email;
+        return this;
+    }
+    
     /* ********************************************* *
      * Conjunto de métodos chamados pelo MenuAdmin.  *
      * ********************************************* */
@@ -264,7 +295,7 @@ public class BetESS implements Serializable {
             for (String apostador: this.apostas.keySet()) {
                 LinkedList<Aposta> lista = this.apostas.get(apostador);
                 for (Aposta a: lista) {
-                    if (!a.IsTerminada()) {
+                    if (!a.getIsTerminada()) {
                         for (Evento e: a.getEventos().values()) {      
                             if (e.getIdEvento() == idEvento) {
                                 // Atualiza estado no Map apostador-aposta.

@@ -164,8 +164,8 @@ public class FrameApostadores extends javax.swing.JFrame {
         // botao consultar apostador
         String s = this.listaApostadores.getSelectedValue();
         if(s != null){
-            /*DialogApostador da = new DialogApostador(this, true, this.betEss, s);
-            da.setVisible(true);*/
+            DialogApostador da = new DialogApostador(this, true, this.betEss, s);
+            da.setVisible(true);
         }
     }//GEN-LAST:event_consultButtonActionPerformed
 

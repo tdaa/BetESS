@@ -37,7 +37,7 @@ public class Aposta implements Serializable {
         this.valor = a.getValor();
         this.eventos = a.getEventos();
         this.oddsApostadas = a.getOdds();
-        this.isTerminada = a.IsTerminada();
+        this.isTerminada = a.getIsTerminada();
     }
     
     public Aposta(int idAposta, Map<Integer, Evento> eventos, 
@@ -110,7 +110,7 @@ public class Aposta implements Serializable {
                 .sum();
     }
     
-    public boolean IsTerminada(){
+    public boolean getIsTerminada(){
         return this.isTerminada;
     }
     
@@ -118,8 +118,27 @@ public class Aposta implements Serializable {
         this.isTerminada = t;
     }
     
+    /**
+     *
+     * @return ganho total possível.
+     */
     public double getGanhoTotal() {
         return (this.valor * this.getTotalOdds());
+    }
+    
+    /**
+     *
+     * @param odd
+     * @param idEvento
+     * @return Resultado apostado num determinado evento.
+     */
+    public String getResultadoApostado(Evento e){
+        double odd = this.oddsApostadas.get(e.getIdEvento());
+        if(e.getOddUm() == odd)
+            return e.getEquipaUm();
+        if(e.getOddDois() == odd)
+            return e.getEquipaDois();
+        else return "EMPATE";
     }
 
     /**
