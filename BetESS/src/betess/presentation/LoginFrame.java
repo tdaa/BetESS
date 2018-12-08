@@ -286,6 +286,10 @@ public class LoginFrame extends javax.swing.JFrame {
             MenuApostador menu = new MenuApostador(this.betEss);
             menu.setLocationRelativeTo(null);
             menu.setVisible(true);
+            if (this.betEss.getApostadores().get(this.betEss.getUser()).getHaNotificacoes()){
+                JDialogNotificacoes not = new JDialogNotificacoes(this, true, this.betEss);
+                not.setVisible(true);
+            }
             this.dispose();
         }
     }//GEN-LAST:event_jLabel_LoginMouseClicked
