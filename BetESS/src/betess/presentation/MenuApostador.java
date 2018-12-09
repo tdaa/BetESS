@@ -277,7 +277,7 @@ public class MenuApostador extends javax.swing.JFrame {
         });
 
         jLabelProfile.setFont(new java.awt.Font("Lucida Grande", 1, 13)); // NOI18N
-        jLabelProfile.setText("Profile");
+        jLabelProfile.setText("Perfil");
 
         indProfile.setOpaque(false);
         indProfile.setPreferredSize(new java.awt.Dimension(3, 43));
@@ -301,7 +301,7 @@ public class MenuApostador extends javax.swing.JFrame {
                 .addComponent(indProfile, javax.swing.GroupLayout.PREFERRED_SIZE, 8, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56)
                 .addComponent(jLabelProfile)
-                .addContainerGap(63, Short.MAX_VALUE))
+                .addContainerGap(71, Short.MAX_VALUE))
         );
         jPanelProfileLayout.setVerticalGroup(
             jPanelProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

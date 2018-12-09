@@ -13,12 +13,16 @@ public class Apostador extends Utilizador {
     private String nome;
     private double essCoins;
     private Map<Integer, Aposta> apostas;
+    private Map<Integer, Boolean> vistos;
+    private boolean haNotificacoes;
 
     public Apostador(String email, String nome, String password, double essCoins) {
         super(email, password);
         this.nome = nome;
         this.essCoins = essCoins;
         this.apostas = new HashMap<>();
+        this.vistos = new HashMap<>();
+        this.haNotificacoes = false;
     }
     
     public Apostador(Apostador a) {
@@ -26,6 +30,8 @@ public class Apostador extends Utilizador {
         this.nome = a.getNome();
         this.essCoins = a.getEssCoins();
         this.apostas = a.getApostas();
+        this.vistos = a.getVistos();
+        this.haNotificacoes = a.getHaNotificacoes();
     }
 
     public Apostador() {
@@ -69,6 +75,26 @@ public class Apostador extends Utilizador {
             this.apostas.put(m.getKey(), m.getValue());
         });
     }
+
+    public boolean getHaNotificacoes() {
+        return haNotificacoes;
+    }
+
+    public void setHaNotificacoes(boolean haNotificacoes) {
+        this.haNotificacoes = haNotificacoes;
+    }
+
+    public Map<Integer, Boolean> getVistos() {
+        return vistos;
+    }
+
+    public void setVistos(Map<Integer, Boolean> vistos) {
+        this.vistos = vistos;
+    }
+    
+    
+    
+    
     
     /**
      * Método addTotalCoins(...).
@@ -121,5 +147,9 @@ public class Apostador extends Utilizador {
     public void addAposta(Aposta aposta) {
         aposta.setIdAposta(this.apostas.size() + 1);
         this.apostas.put(aposta.getIdAposta(), aposta);
+        
+        for(Evento e: aposta.getEventos().values()){
+            this.vistos.put(e.getIdEvento(), false);
+        }
     }
 }

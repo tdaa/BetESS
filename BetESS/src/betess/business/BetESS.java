@@ -330,6 +330,8 @@ public class BetESS implements Serializable {
                         }
                     }
                 }
+                
+                this.apostadores.get(apostador).setHaNotificacoes(true);
                     
             }
         }
